@@ -1,35 +1,35 @@
 <?php if (file_exists('../default.php')) { include '../default.php'; } ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-<HTML>
-<HEAD>
-    <TITLE>Library - Articles</TITLE>
-    <LINK REL="STYLESHEET" HREF="../library.css">
-</HEAD>
-<BODY TEXT="Black" BGCOLOR="White" LINK="#CC9966" ALINK="#CC9966" VLINK="#CC9966">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title><?php print $prog_name; ?> - Articles</title>
+    <link rel="stylesheet" href="../library.css">
+</head>
+<body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
 
-<!-- Header -->
-<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0" BORDER="0">
-<TR>
-    <TD ALIGN="LEFT">
-    <FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2">
-    &nbsp;Navigate: <A HREF="../contents.php" TARGET="contents">Home Page</A> : <A HREF="articles_index.php" TARGET="contents">Articles</A> : Articles list
-    </FONT>
-    </TD>
-</TR>
-</TABLE>
+<!-- header -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr>
+    <td align="left">
+    <font face="arial,helvetica,sans-serif" size="2">
+    &nbsp;Navigate: <a href="../contents.php" target="contents">Home page</a> : <a href="articles_index.php" target="contents">Articles</a> : Articles list
+    </font>
+    </td>
+</tr>
+</table>
 
-<!-- Title -->
-<CENTER><H2>Articles List</H2></CENTER>
+<!-- title -->
+<center><h2>Articles list</h2></center>
 
 <?php
     // controllo i parametri
     if ($DEBUG) { 
-        print 'String 1 is: ' . $string1 . '<BR>';
-        print 'Logical op 1 is: ' . $op1 . '<BR>';
-        print 'String 2 is: ' . $string2 . '<BR>';
-        print 'Logical op 2 is: ' . $op2 . '<BR>';
-        print 'String 3 is: ' . $string3 . '<BR>';
+        print 'string 1 is: ' . $string1 . '<br>';
+        print 'logical op 1 is: ' . $op1 . '<br>';
+        print 'string 2 is: ' . $string2 . '<br>';
+        print 'logical op 2 is: ' . $op2 . '<br>';
+        print 'string 3 is: ' . $string3 . '<br>';
     };
     // string control
     if (!$where) {
@@ -54,101 +54,106 @@
         
     $where_encoded=urlencode($where);
     if ($DEBUG) { 
-        print 'The where is: ' . $where . '<BR>';
-        print 'The where encoded is: ' . $where_encoded . '<BR>';
+        print 'The where is: ' . $where . '<br>';
+        print 'The where encoded is: ' . $where_encoded . '<br>';
     };        
         
-    // if there is something we add "WHERE " at the where clause
+    // if there is something we add "where " at the where clause
     if ($where) { $where_clause="WHERE " . $where; };
-    if ($DEBUG) { print 'The where clause is: ' . $where_clause . '<BR>'; };        
+    if ($DEBUG) { print 'The where clause is: ' . $where_clause . '<br>'; };        
 
     // connessione al database
     if (file_exists('../procedure/connect_db.php')) { include '../procedure/connect_db.php'; }
 
     // leggo gli articoli
     $query="SELECT count(*) FROM articoli " . $where_clause;
-    $result = pg_Exec ($conn,$query);
-    if ($DEBUG) { print 'Query: <B>' . $query . '</B><BR>'; };
+    $result = pg_exec ($conn,$query);
+    if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };
     if (!$result) {
-        if ($DEBUG) { print 'File articles_list error: cannot execute query.\n'; };
+        if ($DEBUG) { print 'file articles_list error: cannot execute query.\n'; };
         exit;
     };
     
     // conto il numero di linee trovate (count ritorna sempre qualcosa).
     $arr=pg_fetch_array ($result,0);
     $num_rows=$arr[0];
-    if ($DEBUG) { print 'Total lines found: ' . $num_rows . '<BR>'; };
+    if ($DEBUG) { print 'Total lines found: ' . $num_rows . '<br>'; };
 
     if ($num_rows=='0') {
-        print '<UL>';
-        print '    <LI>No articles found.';
-        print '</UL>';
+        print '<ul>';
+        print '    <li>No articles found.';
+        print '</ul>';
     } else {
+        // legenda
+        print '<div align="right">';
+        print '&nbsp;<img src="../icone/ico_edit.gif" width="17" height="15" border="0"> = Edit&nbsp;';
+        print '&nbsp;<img src="../icone/ico_delete.gif" width="17" height="15" border="0"> = Delete&nbsp;';
+        print '</div>';
+        
         // stampo l'indice
-        print '<TABLE CELLSPACING="1" CELLPADDING="2" BORDER="0" WIDTH="100%">';
-        print '<TR BGCOLOR="Black">';
-        print '<TD  WIDTH="5%"><FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2" STYLE="color: White">Num.</FONT></TD>';
-        print '<TD WIDTH="95%"><FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2" STYLE="color: White">&nbsp;';
+        print '<table cellspacing="1" cellpadding="2" border="0" width="100%">';
+        print '<tr bgcolor="black">';
+        print '<td  width="5%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Num.</font></td>';
+        print '<td width="95%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">&nbsp;';
        
         for ($count=0; $count<$num_rows; $count+=$max_table_rows) {
             $temp_to=$count+$max_table_rows-1;
             if ($temp_to>$num_rows) { $temp_to=$num_rows-1; };
-            print '<A HREF="articles_list.php?from=' . $count . '&to=' . $temp_to . '&where=' . $where_encoded . '">' . $count . '</A> &nbsp;';
-//            '&string1=' . $string1 . '&op1=' . $op1 . '&string2=' . $string2 . '&op2=' . $op2 . '&string3=' . $string3 . '">' . $count . '</A> &nbsp;';
+            print '<a href="articles_list.php?from=' . $count . '&to=' . $temp_to . '&where=' . $where_encoded . '">' . $count . '</a> &nbsp;';
         }
         print ': Total ' . $num_rows;
-        print '</FONT></TD></TR></TABLE>';
+        print '</font></td></tr></table>';
         
         // stampo il risultato
         $query="SELECT oid,* FROM articoli " . $where_clause;
-        $result = pg_Exec ($conn,$query);
-        if ($DEBUG) { print 'Query: <B>' . $query . '</B><BR>'; };
+        $result = pg_exec ($conn,$query);
+        if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };
         if (!$result) {
-            if ($DEBUG) { print 'File articles_list error: cannot execute query.\n'; };
+            if ($DEBUG) { print 'file articles_list error: cannot execute query.\n'; };
             exit;
         };
        
         // conto il numero di righe
         $num_rows=pg_numrows($result);
-        if ($DEBUG) { print 'Numbers of rows in table: <B>' . $num_rows . '</B><BR>'; };
+        if ($DEBUG) { print 'Numbers of rows in table: <b>' . $num_rows . '</b><br>'; };
     
         // imposto i limiti dei record da stampare (stampo da $from a $to).
         if ($from=='') { $from=0; };
         if ($to=='') { $to=$to+$max_table_rows-1; };
         // you cannot exceed number of row reported by database.
         if ($to>$num_rows) { $to=$num_rows-1; };
-        if ($DEBUG) { print 'Index: <B>from=' . $from . ', to=' . $to . '</B>'; };
+        if ($DEBUG) { print 'Index: <b>from=' . $from . ', to=' . $to . '</b>'; };
     
-        print '<TABLE CELLSPACING="1" CELLPADDING="2" BORDER="0" WIDTH="100%">';
-        print '<TR BGCOLOR="Black">';
-        print '<TD WIDTH="5%"><FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2" STYLE="color: White">Num.</FONT></TD>';
-        print '<TD><FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2" STYLE="color: White">Article</FONT></TD>';
-        print '<TD WIDTH="10%"><FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2" STYLE="color: White">Operation</FONT></TD>';
+        print '<table cellspacing="1" cellpadding="2" border="0" width="100%">';
+        print '<tr bgcolor="black">';
+        print '<td width="5%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Num.</font></td>';
+        print '<td><font face="arial,helvetica,sans-serif" size="2" style="color: white">Article description</font></td>';
+        print '<td width="10%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Operation</font></td>';
         for ($count=$from; $count<=$to; $count++)
         {
             $arr=pg_fetch_array ($result, $count);
             if (($count % 2) == 0) {
-                print '<TR BGCOLOR="#33CC99">';
+                print '<tr bgcolor="#33cc99">';
             } else {
-                print '<TR BGCOLOR="White">';
+                print '<tr bgcolor="white">';
             };
-            print '<TD VALIGN="TOP"><FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2">' . $count;
+            print '<td valign="top"><font face="arial,helvetica,sans-serif" size="2">' . $count;
             if ($DEBUG) {
-                print '<BR><I>' . $arr['oid'] . '</I>';
+                print '<br><i>' . $arr['oid'] . '</i>';
             }
-            print '</FONT></TD>';
-            print '<TD VALIGN="TOP"><FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2">' . $arr['articolo'] . '</FONT></TD>';
-            print '<TD VALIGN="TOP">';
-            print '    <A HREF="secure/articles_modify.php?oid=' . $arr['oid'] . '&where=' . $where_encoded . '"><IMG SRC="../icone/ico_edit.gif" WIDTH="17" HEIGHT="15" BORDER="0">';
-            print '    <A HREF="secure/articles_delete.php?oid=' . $arr['oid'] . '&where=' . $where_encoded . '"><IMG SRC="../icone/ico_delete.gif" WIDTH="17" HEIGHT="15" BORDER="0">';            
-            print '</TD>';
-            print '</TR>';
+            print '</font></td>';
+            print '<td valign="top"><font face="arial,helvetica,sans-serif" size="2">' . $arr['articolo'] . '</font></td>';
+            print '<td valign="top">';
+            print '    <a href="secure/articles_modify.php?oid=' . $arr['oid'] . '&where=' . $where_encoded . '"><img src="../icone/ico_edit.gif" width="17" height="15" border="0">';
+            print '    <a href="secure/articles_delete.php?oid=' . $arr['oid'] . '&where=' . $where_encoded . '"><img src="../icone/ico_delete.gif" width="17" height="15" border="0">';
+            print '</td>';
+            print '</tr>';
         };
-        print '</TABLE>';
+        print '</table>';
     }
     // chiudo la connessione
     pg_close ($conn);
 ?>
 
-</BODY>
-</HTML>
+</body>
+</html>

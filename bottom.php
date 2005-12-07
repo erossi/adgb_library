@@ -1,6 +1,6 @@
 <?php if (file_exists('default.php')) { include 'default.php'; } ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
     <TITLE><?php print $prog_name; ?></TITLE>
@@ -19,7 +19,7 @@
     <A HREF="users/users_index.php" TARGET="contents">Users</A>&nbsp;:&nbsp;
     <A HREF="preference/preference_index.php" TARGET="contents">Preference</A>
     </FONT></TD>
-    <TD ALIGN="RIGHT" VALIGN="TOP"><FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2" STYLE="color: White">Powered by <A HREF="http://www.tecnobrain.com">TecnoBrain<IMG SRC="icone/logo_tecnobrain.gif" WIDTH="16" HEIGHT="18" BORDER="0" ALT="Powered by TecnoBrain" ALIGN="ABSMIDDLE"></A>&nbsp;</FONT></TD>
+    <TD ALIGN="RIGHT" VALIGN="TOP"><FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2" STYLE="color: White">Powered by <A HREF="http://www.tecnobrain.com" target="_top">TecnoBrain<IMG SRC="icone/logo_tecnobrain.gif" WIDTH="16" HEIGHT="18" BORDER="0" ALT="Powered by TecnoBrain" ALIGN="ABSMIDDLE"></A>&nbsp;</FONT></TD>
 </TR>
 </TABLE>
 

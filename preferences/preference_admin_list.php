@@ -3,8 +3,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
-    <TITLE>Library - Users</TITLE>
-    <LINK REL="STYLESHEET" HREF="../../library.css">
+    <TITLE>Library - Preference</TITLE>
+    <LINK REL="STYLESHEET" HREF="../library.css">
 </HEAD>
 <BODY TEXT="Black" BGCOLOR="White" LINK="#CC9966" ALINK="#CC9966" VLINK="#CC9966">
 
@@ -13,7 +13,7 @@
 <TR>
     <TD ALIGN="LEFT">
     <FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2">
-    &nbsp;Navigate: <A HREF="../../contents.php" TARGET="contents">Home Page</A> : <A HREF="../users_index.php" TARGET="contents">Users</A> : Administrators list
+    &nbsp;Navigate: <A HREF="../../contents.php" TARGET="contents">Home Page</A> : <A HREF="preference_index.php" TARGET="contents">Preference</A> : Administrators list
     </FONT>
     </TD>
 </TR>
@@ -24,7 +24,7 @@
 
 <?php
     // connessione al database
-    if (file_exists('../../procedure/connect_db.php')) { include '../../procedure/connect_db.php'; }
+    if (file_exists('../procedure/connect_db.php')) { include '../procedure/connect_db.php'; }
     
     // stampo il risultato
     $query="SELECT * FROM password";

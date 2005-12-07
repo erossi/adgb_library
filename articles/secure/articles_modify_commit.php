@@ -1,6 +1,6 @@
 <?php if (file_exists('../../default.php')) { include '../../default.php'; } ?>
 
-<!doctype html public "-//w3c//dtd html 3.2 final//en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
     <title>Library - Articles</title>

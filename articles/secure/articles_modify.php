@@ -36,7 +36,7 @@
     $result = pg_Exec ($conn,$query);
     if ($DEBUG) { print 'Query: <B>' . $query . '</B><BR>'; };
     if (!$result) {
-        if ($DEBUG) { print 'File articles_delete error: cannot execute query.\n'; };
+        if ($DEBUG) { print 'File articles_modify error: cannot execute query.\n'; };
         exit;
     };
 

@@ -4,7 +4,7 @@ Auth_PGdatabase biblioteca
 Auth_PGpwd_table password
 Auth_PGuid_field username
 Auth_PGpwd_field password
-AuthName "Access Books Restricted Area"
+AuthName "access Books Restricted Area"
 AuthType basic
 Auth_PG_encrypted off
 Auth_PGpwd_whereclause "and area='books'"

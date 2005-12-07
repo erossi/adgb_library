@@ -1,6 +1,6 @@
 <?php if (file_exists('default.php')) { include 'default.php'; } ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
     <TITLE><?php print $prog_name; ?></TITLE>

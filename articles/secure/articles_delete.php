@@ -1,9 +1,9 @@
 <?php if (file_exists('../../default.php')) { include '../../default.php'; } ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
-    <TITLE>Library - Articles</TITLE>
+    <TITLE><?php print $prog_name; ?> - Articles</TITLE>
     <LINK REL="STYLESHEET" HREF="../../library.css">
 </HEAD>
 <BODY TEXT="Black" BGCOLOR="White" LINK="#CC9966" ALINK="#CC9966" VLINK="#CC9966">
