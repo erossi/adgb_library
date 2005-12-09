@@ -11,7 +11,6 @@
 
 <font face="arial,helvetica,sans-serif" size="2">
 
-<? print_top($prog_name); ?>
 <? print_navigation('Books','Home Page','../contents.php'); ?>
 <? print_title('Books'); ?>
 

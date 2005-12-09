@@ -11,7 +11,7 @@
 
 <font face="arial,helvetica,sans-serif" size="2">
 
-<? print_top($prog_name); ?>
+
 <? print_navigation('Insert a new user','Home Page','../../contents.php','Users','../users_index.php'); ?>
 <? print_title('Insert a new user'); ?>
 

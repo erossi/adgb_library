@@ -1,17 +1,6 @@
 <? if (file_exists('../default.php')) { include '../default.php'; } ?>
 <? if (file_exists('../procedure/utility.php')) { include '../procedure/utility.php'; } ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-<head>
-    <title><? print $prog_name ?> - Administrators section</title>
-    <link rel="stylesheet" href="../library.css">
-</head>
-<body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
-
-<font face="arial,helvetica,sans-serif" size="2">
-
-<? print_top($prog_name); ?>
 <? print_navigation('Administrators list','Home Page','../contents.php','Administrators section','admin_index.php'); ?>
 <? print_title('Administrators list'); ?>
 

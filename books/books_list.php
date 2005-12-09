@@ -1,19 +1,9 @@
 <? if (file_exists('../default.php')) { include '../default.php'; } ?>
 <? if (file_exists('../procedure/utility.php')) { include '../procedure/utility.php'; } ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-<head>
-    <title><? print $prog_name ?> - Books</title>
-    <link rel="stylesheet" href="../library.css">
-</head>
-<body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
-
-<font face="arial,helvetica,sans-serif" size="2">
-
-<? print_top($prog_name); ?>
 <? print_navigation('Books list','Home Page','../contents.php','Books','books_index.php'); ?>
 <? print_title('Books list'); ?>
+
 
 <?
     // controllo i parametri
@@ -112,11 +102,15 @@
         echo "  <li>No books found.\n";
         echo "</ul>\n";
     } else {
-        // stampo l'indice
+        // print index
         echo "<div align=\"center\">\n";
         echo "<table cellspacing=\"1\" cellpadding=\"3\" border=\"0\" width=\"90%\">\n";
         echo "<tr bgcolor=\"white\">\n";
-        echo "    <td width=\"5%\"><font face=\"arial,helvetica,sans-serif\" size=\"2\">Index:</font></td>\n";
+        echo "    <td align=\"right\" valign=\"middle\" bgcolor=\"#e0e0e0\" width=\"10%\">\n";
+        echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+        echo "    Index:\n";
+        echo "    </font>\n";
+        echo "    </td>\n";
         echo "    <td width=\"95%\"><font face=\"arial,helvetica,sans-serif\" size=\"2\">&nbsp;\n";
         for ($count=0; $count<$num_rows; $count+=$max_table_rows) {
             $temp_to=$count+$max_table_rows-1;
@@ -128,34 +122,30 @@
         echo "</tr>\n";
         echo "</table>\n";
         echo "</div>\n";
-        
-        // legenda
+
+        // print icon description
         echo "<div align=\"center\">\n";
         echo "<table cellspacing=\"1\" cellpadding=\"3\" border=\"0\" width=\"90%\">\n";        
         echo "<tr>\n";
-        echo "<td align=\"left\" valign=\"middle\">\n";
+        echo "    <td align=\"right\" valign=\"middle\" bgcolor=\"white\" width=\"10%\">\n";
         echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
-        echo "    &nbsp;<img src=\"../icone/ico_info.gif\" width=\"20\" height=\"20\" border=\"0\" align=\"absmiddle\"> = Info&nbsp;\n";
+        echo "    Key:\n";
         echo "    </font>\n";
-        echo "</td>\n";
-        echo "<td align=\"right\" valign=\"middle\" bgcolor=\"white\">\n";
+        echo "    </td>\n";
+        echo "    <td align=\"left\" valign=\"middle\" bgcolor=\"#e0e0e0\">\n";
         echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
-        echo "    &nbsp;<img src=\"../icone/ico_protected.gif\" width=\"45\" height=\"15\" border=\"0\" hspace=\"5\" align=\"absmiddle\" alt=\"This links are password protected\" align=\"absmiddle\">&nbsp;Password protected links: \n";
+        echo "    &nbsp;<img src=\"../icone/mini-help.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Information";
+        echo "    &nbsp;<img src=\"../icone/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Draw";
+        echo "    &nbsp;<img src=\"../icone/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Deposit";
+        echo "    &nbsp;<img src=\"../icone/mini-history.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = History";
+        echo "    &nbsp;<img src=\"../icone/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Edit";
+        echo "    &nbsp;<img src=\"../icone/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Delete";
         echo "    </font>\n";
-        echo "</td>\n";
-        echo "<td align=\"left\" valign=\"middle\" bgcolor=\"#ffc1c1\">\n";
-        echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
-        echo "    &nbsp;<img src=\"../icone/ico_draw.gif\"    width=\"20\" height=\"20\" border=\"0\" align=\"absmiddle\"> = Draw&nbsp;\n";
-        echo "    &nbsp;<img src=\"../icone/ico_deposit.gif\" width=\"20\" height=\"20\" border=\"0\" align=\"absmiddle\"> = Deposit&nbsp;\n";
-        echo "    &nbsp;<img src=\"../icone/ico_history.gif\" width=\"20\" height=\"20\" border=\"0\" align=\"absmiddle\"> = History&nbsp;\n";
-        echo "    &nbsp;<img src=\"../icone/ico_edit.gif\"    width=\"20\" height=\"20\" border=\"0\" align=\"absmiddle\"> = Edit&nbsp;\n";
-        echo "    &nbsp;<img src=\"../icone/ico_delete.gif\"  width=\"20\" height=\"20\" border=\"0\" align=\"absmiddle\"> = Delete&nbsp;\n";
-        echo "    </font>\n";
-        echo "</td>\n";
+        echo "    </td>\n";
         echo "</tr>\n"; 
         echo "</table>\n";
         echo "</div>\n";
-
+        
         // stampo il risultato
         $query="SELECT oid,* FROM libri" . $where_clause . $order_clause;
         $result = db_execute($conn,$query);
@@ -187,70 +177,70 @@
         {
             $arr=pg_fetch_array ($result,$count);
             if (($count % 2) == 0) {
-                print '<tr bgcolor="#e0e0e0">';
+                echo "<tr bgcolor=\"#e0e0e0\">\n";
             } else {
-                print '<tr bgcolor="white">';
+                echo "<tr bgcolor=\"white\">\n";
             };
 
             // first column
-            print '<td valign="top" width="5%"';
-            if ($arr['presente'] == 'f') { 
-                print ' bgcolor="#ffc1c1"> ';
-            } else {
-                print '>';
+            echo "<td valign=\"top\" width=\"5%\">\n";
+            echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+            echo "    " . $count . "\n";
+            if ($DEBUG) {
+                echo "    <i>" . $arr['oid'] . "</i>\n";
             }
-            print '    <font face="arial,helvetica,sans-serif" size="2">';
-            print $count . '<br>';
-            if ($arr['presente'] == 'f') { print '<i>Drawn</i><br>'; }
-            if ($DEBUG) { print '<i>' . $arr['oid'] . '</i>'; }
-            print '    </font>';
-            print '</td>';
+            if ($arr['presente'] == 'f') {
+                echo "    <i>Drawn</i><br>\n";
+            }
+            echo "    </font>\n";
+            echo "</td>\n";
 
             // second column
-            print '<td valign="top" width="65%"';
-            if ($arr['presente'] == 'f') { 
-                print ' background="../icone/back_drown.gif">';
+            echo "<td valign=\"top\" width=\"5%\"";
+            if ($arr['presente'] == 'f') {
+                echo " background=\"../icone/back_drown.gif\">\n";
             } else {
-                print '>';
+                echo ">\n";
             }
-            print '    <font face="arial,helvetica,sans-serif" size="2">';
-            print '    <i>' . $arr['titolo'] . '</i>';
-            if ($arr['info'] != "") { print '&nbsp;(' . $arr['info'] . ')'; }
-            print '<br>' . $arr['aut1'];
-            if ($arr['aut2'] != "") { print ',&nbsp;' . $arr['aut2']; }
-            if ($arr['aut3'] != "") { print ',&nbsp;' . $arr['aut3']; }
-            if ($arr['aut4'] != "") { print ',&nbsp;' . $arr['aut4']; }
-            if ($arr['aut5'] != "") { print ',&nbsp;' . $arr['aut5']; }
-            if ($arr['aut6'] != "") { print ',&nbsp;' . $arr['aut6']; }
-            if ($arr['aut7'] != "") { print ',&nbsp;' . $arr['aut7']; }
+            echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+            echo "    <i>" . $arr['titolo'] . "</i>\n";
+            if ($arr['info'] != "") { echo "&nbsp;(" . $arr['info'] . ")\n"; }
+            echo "    <br>" . $arr['aut1'];
+            if ($arr['aut2'] != "") { echo ",&nbsp;" . $arr['aut2']; }
+            if ($arr['aut3'] != "") { echo ",&nbsp;" . $arr['aut3']; }
+            if ($arr['aut4'] != "") { echo ",&nbsp;" . $arr['aut4']; }
+            if ($arr['aut5'] != "") { echo ",&nbsp;" . $arr['aut5']; }
+            if ($arr['aut6'] != "") { echo ",&nbsp;" . $arr['aut6']; }
+            if ($arr['aut7'] != "") { echo ",&nbsp;" . $arr['aut7']; }
             print '    <br><u>' . $arr['casa_editoriale'] . '</u>';
             print '    </font>';
             print '</td>';
             // 3rd column (3 fields)
-            print '<td valign="top" width="5%">';
-            print '    <font face="arial,helvetica,sans-serif" size="2">' . $arr['collocazione'] . '</font>';
-            print '</td>';
-            print '<td valign="top" width="5%">';
-            print '    <font face="arial,helvetica,sans-serif" size="2">' . $arr['scaffale'] . '</font>';
-            print '</td>';
-            print '<td valign="top" width="5%">';
-            print '    <font face="arial,helvetica,sans-serif" size="2">' . $arr['numero'] . '</font>';
-            print '</td>';                        
+            echo "<td valign=\"top\" width=\"5%\">\n";
+            echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">" . $arr['collocazione'] . "</font>\n";
+            echo "</td>\n";
+            echo "<td valign=\"top\" width=\"5%\">\n";
+            echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">" . $arr['scaffale'] . "</font>\n";
+            echo "</td>\n";
+            echo "<td valign=\"top\" width=\"5%\">\n";
+            echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">" . $arr['numero'] . "</font>\n";
+            echo "</td>\n";
             // 4th column
-            print '<td valign="top" width="5%">';
-            print '    <a href="books_info.php?oid=' . $arr['oid'] . '"><img src="../icone/ico_info.gif" width="20" height="20" border="0" alt="View detailed information for this book"></a>';
-            print '</td>';
-            // 5th column
-            print '<td valign="top" bgcolor="#ffc1c1" width="10%">';
+            echo "<td valign=\"top\" bgcolor=\"#e0e0e0\" width=\"5%\">\n";
+            echo "    <a href=\"books_info.php?oid=" . $arr['oid'] . "\"><img src=\"../icone/mini-help.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"View detailed information for this book\"></a>\n";
+            echo "</td>\n";
+
+            // last column (print operation)
+            echo "    <td valign=\"top\" bgcolor=\"#e0e0e0\" width=\"5%\">\n";
             if ($arr['presente'] == 'f') {
-                print '    <a href="secure/books_deposit.php?coll=' . $arr['collocazione'] . '&shelf=' . $arr['scaffale'] . '&num=' . $arr['numero'] . '"><img src="../icone/ico_deposit.gif" width="20" height="20" border="0" alt="Deposit book"></a>';
+                echo "        <a href=\"secure/books_deposit.php?coll=" . $arr['collocazione'] . "&shelf=" . $arr['scaffale'] . "&num=" . $arr['numero'] . "\"><img src=\"../icone/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Deposit this book\"></a>\n";
             } else {
-                print '    <a href="secure/books_draw.php?coll=' . $arr['collocazione'] . '&shelf=' . $arr['scaffale'] . '&num=' . $arr['numero'] . '"><img src="../icone/ico_draw.gif" width="20" height="20" border="0" alt="Draw this book"></a>';
+                echo "        <a href=\"secure/books_draw.php?coll=" . $arr['collocazione'] . "&shelf=" . $arr['scaffale'] . "&num=" . $arr['numero'] . "\"><img src=\"../icone/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Draw this book\"></a>\n";
             }
-            print '    <a href="secure/books_history.php?coll=' . $arr['collocazione'] . '&shelf=' . $arr['scaffale'] . '&num=' . $arr['numero'] . '"><img src="../icone/ico_history.gif" width="20" height="20" border="0" alt="View history for this book"></a>';
-            print '    <a href="secure/books_modify.php?oid=' . $arr['oid'] . '"><img src="../icone/ico_edit.gif" width="20" height="20" border="0" alt="Modify information for this book"></a>';
-            print '    <a href="secure/books_delete.php?oid=' . $arr['oid'] . '"><img src="../icone/ico_delete.gif" width="20" height="20" border="0" alt="Delete this book"></a>';
-            print '</td>';
+            echo "        <a href=\"secure/books_history.php?coll=" . $arr['collocazione'] . "&shelf=" . $arr['scaffale'] . "&num=" . $arr['numero'] . "\"><img src=\"../icone/mini-history.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"View history for this book\"></a>\n";
+            echo "        <a href=\"secure/books_modify.php?oid=" . $arr['oid'] . "\"><img src=\"../icone/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Modify information for this book\"></a>\n";
+            echo "        <a href=\"secure/books_delete.php?oid=" . $arr['oid'] . "\"><img src=\"../icone/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Delete this book\"></a>\n";
+            echo "    </td>\n";
             echo "</tr>\n";
         };
         echo "</table>\n";

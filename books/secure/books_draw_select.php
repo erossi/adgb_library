@@ -11,7 +11,7 @@
 
 <font face="arial,helvetica,sans-serif" size="2">
 
-<? print_top($prog_name); ?>
+
 <? print_navigation('Draw a book (Select user)','Home Page','../../contents.php','Books','../books_index.php','Draw a book','books_draw.php?coll=' . $coll . '&shelf=' . $shelf . '&num=' . $num . '"');  ?>
 <? print_title('Draw a book (Select user)'); ?>
 

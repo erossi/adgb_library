@@ -11,7 +11,7 @@
 
 <font face="arial,helvetica,sans-serif" size="2">
 
-<? print_top($prog_name); ?>
+
 <? print_navigation('Insert an article','Home Page','../../contents.php','Articles','../articles_index.php'); ?>
 <? print_title('Insert an article'); ?>
 

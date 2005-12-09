@@ -1,4 +1,4 @@
-Auth_PGhost localhost
+Auth_PGhost dbase.adgb.net
 Auth_PGport 5432
 Auth_PGdatabase biblioteca
 Auth_PGpwd_table password

@@ -11,7 +11,7 @@
 
 <font face="arial,helvetica,sans-serif" size="2">
 
-<? print_top($prog_name); ?>
+
 <? print_navigation('Delete an article','Home Page','../../contents.php','Articles','../articles_index.php'); ?>
 <? print_title('Delete an article'); ?>
 
@@ -48,7 +48,7 @@
         <form action="../articles_index.php">
             <input type="submit" value="Oops, cancel operation!">
         </form>
-        &nbsp;<a href="javascript:history.back(1)"><img src="../../icone/ico-back.png" width="12" height="12" hspace="3" border="0" align="absmiddle">Back</a> to previous screen.
+        <a href="javascript:history.back(1)">Back</a> to previous screen.
         </font>
     </td>
 </table>

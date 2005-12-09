@@ -1,17 +1,7 @@
 <? if (file_exists('../../default.php')) { include '../../default.php'; } ?>
 <? if (file_exists('../../procedure/utility.php')) { include '../../procedure/utility.php'; } ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-<head>
-    <title><? print $prog_name ?> - Users</title>
-    <link rel="stylesheet" href="../../library.css">
-</head>
-<body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
 
-<font face="arial,helvetica,sans-serif" size="2">
-
-<? print_top($prog_name); ?>
 <? print_navigation('Users list','Home Page','../../contents.php','Users','../users_index.php'); ?>
 <? print_title('Users list'); ?>
 
@@ -73,39 +63,45 @@
         print '    <li>No users found.';
         print '</ul>';
     } else {
-        // stampo l'indice
-        print '<div align="center">';
-        print '<table cellspacing="1" cellpadding="3" border="0" width="90%">';
-        print '<tr bgcolor="white">';
-        print '    <td  width="5%"><font face="arial,helvetica,sans-serif" size="2">Index:</font></td>';
-        print '    <td width="95%"><font face="arial,helvetica,sans-serif" size="2">&nbsp;';
+        // print index
+        echo "<div align=\"center\">\n";
+        echo "<table cellspacing=\"1\" cellpadding=\"3\" border=\"0\" width=\"90%\">\n";
+        echo "<tr bgcolor=\"white\">\n";
+        echo "    <td align=\"right\" valign=\"middle\" bgcolor=\"#e0e0e0\" width=\"10%\">\n";
+        echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+        echo "    Index:\n";
+        echo "    </font>\n";
+        echo "    </td>\n";
+        echo "    <td width=\"95%\"><font face=\"arial,helvetica,sans-serif\" size=\"2\">&nbsp;\n";
         for ($count=0; $count<$num_rows; $count+=$max_table_rows) {
             $temp_to=$count+$max_table_rows-1;
             if ($temp_to>$num_rows) { $temp_to=$num_rows-1; };
-            print '<a href="users_list.php?from=' . $count . '&to=' . $temp_to . '&where=' . $where_encoded . '">' . $count . '</a> &nbsp;';
+            echo "        <a href=\"users_list.php?from=" . $count . "&to=" . $temp_to . "&order=" . $order . "&where=" . $where_encoded . "\">" . $count . "</a> &nbsp;\n";
         }
-        print ': Total ' . $num_rows;
-        print '</font></td></tr></table>';
-        print '</div>';
-        
-        // legenda
-        print '<div align="center">';
-        print '<table cellspacing="1" cellpadding="3" border="0" width="90%">';        
-        print '<tr>';
-        print '<td align="right" valign="middle" bgcolor="white">';
-        print '    <font face="arial,helvetica,sans-serif" size="2">';
-        print '    &nbsp;<img src="../../icone/ico_protected.gif" width="45" height="15" border="0" hspace="5" align="absmiddle" alt="This links are password protected" align="absmiddle">&nbsp;Password protected links: ';
-        print '    </font>';
-        print '</td>';
-        print '<td align="left" valign="middle" bgcolor="#ffc1c1">';
-        print '    <font face="arial,helvetica,sans-serif" size="2">';
-        print '    &nbsp;<img src="../../icone/ico_edit.gif" width="20" height="20" border="0" align="absmiddle"> = Edit&nbsp;';
-        print '    &nbsp;<img src="../../icone/ico_delete.gif" width="20" height="20" border="0" align="absmiddle"> = Delete&nbsp;';
-        print '    </font>';
-        print '</td>';
-        print '</tr>'; 
-        print '</table>';
-        print '</div>';
+        echo ": Total " . $num_rows . "\n";
+        echo "    </font></td>\n";
+        echo "</tr>\n";
+        echo "</table>\n";
+        echo "</div>\n";
+
+        // print icon description
+        echo "<div align=\"center\">\n";
+        echo "<table cellspacing=\"1\" cellpadding=\"3\" border=\"0\" width=\"90%\">\n";        
+        echo "<tr>\n";
+        echo "    <td align=\"right\" valign=\"middle\" bgcolor=\"white\" width=\"10%\">\n";
+        echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+        echo "    Key:\n";
+        echo "    </font>\n";
+        echo "    </td>\n";
+        echo "    <td align=\"left\" valign=\"middle\" bgcolor=\"#e0e0e0\">\n";
+        echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+        echo "    &nbsp;<img src=\"../../icone/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Edit";
+        echo "    &nbsp;<img src=\"../../icone/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Delete";
+        echo "    </font>\n";
+        echo "    </td>\n";
+        echo "</tr>\n"; 
+        echo "</table>\n";
+        echo "</div>\n";
 
         // stampo il risultato
         $query="SELECT oid,* FROM utenti" . $where_clause  . $order_clause;
@@ -131,8 +127,8 @@
         print '<table cellspacing="1" cellpadding="3" border="0" width="90%">';
         print '<tr bgcolor="#336699">';
         print '    <td width="5%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Num.</font></td>';
-        print '    <td width="85%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">User description</font></td>';
-        print '    <td width="10%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Operation</font></td>';
+        print '    <td width="90%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">User description</font></td>';
+        print '    <td width="5%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Operation</font></td>';
         print '</tr>';
         for ($count=$from; $count<=$to; $count++)        
         {
@@ -144,7 +140,7 @@
             };
 
             // first column
-            print '<td valign="top">';
+            print '<td valign="top" width="5%">';
             print '    <font face="arial,helvetica,sans-serif" size="2">';
             print $count . '<br>';
             if ($DEBUG) { print '<i>' . $arr['oid'] . '</i>'; }
@@ -152,7 +148,7 @@
             print '</td>';
 
             // second column
-            echo "<td valign=\"top\">\n";
+            echo "<td valign=\"top\" width=\"90%\">\n";
             echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
             
             echo "    <i>" . $arr['nome'] . "&nbsp;" . $arr['cognome'];
@@ -166,14 +162,14 @@
             echo "    </font>\n";
             echo "</td>\n";
             
-            // third column
-            print '<td valign="top" bgcolor="#ffc1c1">';
-            print '    <a href="users_modify.php?oid=' . $arr['oid'] . '"><img src="../../icone/ico_edit.gif" width="20" height="20" border="0" alt="Modify information for this user"></a>';
-            print '    <a href="users_delete.php?oid=' . $arr['oid'] . '"><img src="../../icone/ico_delete.gif" width="20" height="20" border="0" alt="Delete this user"></a>';
-            print '</td>';
-            print '</tr>';
+            // 3rd column
+            echo "    <td valign=\"top\" bgcolor=\"#e0e0e0\" width=\"5%\">\n";
+            echo "        <a href=\"users_modify.php?oid=" . $arr['oid'] . "\"><img src=\"../../icone/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Modify information for this user\"></a>\n";
+            echo "        <a href=\"users_delete.php?oid=" . $arr['oid'] . "\"><img src=\"../../icone/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Delete this user\"></a>\n";
+            echo "    </td>\n";
+            echo "</tr>\n";
         };
-        print '</table>';
+        echo "</table>\n";
     }
     // chiudo la connessione
     db_close($conn);

@@ -1,3 +1,8 @@
+<!-- Library version 0.5, Copyright (C) 2000 TecnoBrain
+     Library comes with ABSOLUTELY NO WARRANTY; This is free software,
+     and you are welcome to redistribute it under GNU Public Licence Terms.
+     Please read the file COPYING shipped with this distribution. -->
+
 <? if (file_exists('default.php')) { include 'default.php'; } ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -6,20 +11,25 @@
     <title><? print $prog_name; ?></title>
     <link rel="stylesheet" href="library.css">
 </head>
-<body text="black" bgcolor="black" link="white" alink="white" vlink="white">
+<body text="black" bgcolor="#e0e0e0" link="#336699" alink="#336699" vlink="#336699" background="icone/bottom_bg.png" marginheight="0" marginwidth="0" topmargin="0" rightmargin="0">
 
-<table bgcolor="black" cellspacing="0" cellpadding="0" border="0" width="100%">
+<table width="615" cellspacing="0" cellpadding="0" border="0">
 <tr>
-    <td align="left"  valign="top">
-    <font face="arial,helvetica,sans-serif" size="2" style="color: white">
-    &nbsp;<img src="icone/ico-arrow-right.gif" width="12" height="12" border="0" hspace="5" align="absmiddle">
-    <a href="books/books_index.php" target="contents" style="color: white; font-decoration: none;">Books</a>&nbsp;:&nbsp;
-    <a href="journals/journals_index.php" target="contents" style="color: white; font-decoration: none;">Journals</a>&nbsp;:&nbsp;
-    <a href="articles/articles_index.php" target="contents" style="color: white; font-decoration: none;">Articles</a>&nbsp;:&nbsp;
-    <a href="users/users_index.php" target="contents" style="color: white; font-decoration: none;">Users</a>&nbsp;:&nbsp;
-    <a href="admin/admin_index.php" target="contents" style="color: white; font-decoration: none;">Administrators section</a>
-    </font></td>
-    <td align="right" valign="top"><font face="arial,helvetica,sans-serif" size="2" style="color: white"><a href="http://www.tecnobrain.com" target="_top" style="color: white">Powered by TecnoBrain&nbsp;<img src="icone/logo_tecnobrain.gif" width="16" height="18" border="0" alt="Powered by TecnoBrain" align="absmiddle"></a>&nbsp;</font></td>
+    <td width="30"  align="left" valign="top"><img src="icone/bottom_bg.png" width="20" height="50" border="0" alt=""></td>
+    <td width="20"  align="left" valign="top"><img src="icone/bottom_tl.png" width="20" height="50" border="0" alt=""></td>
+    <td width="300" align="left" valign="top" background="icone/bottom_tc.png">
+        <font face="arial,helvetica,sans-serif" size="2">
+        <br>&nbsp;&nbsp;&nbsp;
+        <a href="books/books_index.php"       target="contents">Books</a>&nbsp;:&nbsp;
+        <a href="articles/articles_index.php" target="contents">Articles</a>&nbsp;:&nbsp;
+        <a href="users/users_index.php"       target="contents">Users</a>&nbsp;:&nbsp;
+        <a href="admin/admin_index.php"       target="contents">Admin</a>
+        </font>
+    </td>
+    <td width="25"  align="left" valign="top"><img src="icone/bottom_tr.png" width="25" height="50" border="0" alt=""></td>
+    <td width="20"  align="left" valign="top"><a href="http://www.tecnobrain.com" target="_top"><img src="icone/bottom_tlb.png" width="20" height="50" border="0" alt="Powered by TecnoBrain"></a></td>
+    <td width="185" align="center" valign="top" bgcolor="black" background="icone/bottom_tcb.png"><a href="http://www.tecnobrain.com" target="_top"><img src="icone/logo-tecnobrain.gif" width="185" height="25" border="0" vspace="5" alt="Powered by TecnoBrain"></a></td>
+    <td width="20"  align="left" valign="top"><a href="http://www.tecnobrain.com" target="_top"><img src="icone/bottom_trb.png" width="20" height="50" border="0" alt="Powered by TecnoBrain"></td>
 </tr>
 </table>
 

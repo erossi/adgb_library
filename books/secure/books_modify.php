@@ -11,7 +11,7 @@
 
 <font face="arial,helvetica,sans-serif" size="2">
 
-<? print_top($prog_name); ?>
+
 <? print_navigation('Modify a book','Home Page','../contents.php','Books','../books_index.php'); ?>
 <? print_title('Modify  a book'); ?>
 
@@ -115,6 +115,8 @@
 	echo "    </td>\n";
 	echo "</tr>\n";
 	echo "</table>\n";
+    
+    db_close ($conn);
 ?>
 
 </font>

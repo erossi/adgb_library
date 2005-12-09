@@ -11,9 +11,9 @@
 
 <font face="arial,helvetica,sans-serif" size="2">
 
-<? print_top($prog_name); ?>
+
 <? print_navigation('Articles','Home Page','../contents.php'); ?>
-<? print_title('Articles'); ?>
+<? print_title('Module GestArt - Version 0.1'); ?>
 
 <table align="center" width="90%" cellspacing="1" cellpadding="3" border="0">
 <tr>
@@ -43,7 +43,7 @@
         </font>
         </form>
         <form action="secure/articles_insert.php">
-            <input type="submit" name="submit" value="Insert a new article" width="50%">
+            <input type="submit" name="submit" value="Insert a new article" width="50%"><img src="../icone/big-articles.png" width="48" height="48" border="0" hspace="10" alt="GestArt Version 0.1" align="absmiddle">
         </form>
         </font>
     </td>

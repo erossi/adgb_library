@@ -23,8 +23,7 @@ A:ACTIVE {
     text-decoration: none;
 }
 A:HOVER {
-	color : white;
-    background-color: #336699;
+	color : #336699;
     text-decoration: none;
 }
 BODY {
