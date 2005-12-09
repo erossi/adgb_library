@@ -1,0 +1,66 @@
+Table    = articoli
++----------------------------------+----------------------------------+-------+
+|              Field               |              Type                | Length|
++----------------------------------+----------------------------------+-------+
+| articolo                         | text                             |   var |
++----------------------------------+----------------------------------+-------+
+
+Table    = libri
++----------------------------------+----------------------------------+-------+
+|              Field               |              Type                | Length|
++----------------------------------+----------------------------------+-------+
+| scaffale                         | char                             |     1 |
+| numero                           | int4                             |     4 |
+| titolo                           | text                             |   var |
+| info                             | text                             |   var |
+| aut1                             | text                             |   var |
+| aut2                             | text                             |   var |
+| aut3                             | text                             |   var |
+| aut4                             | text                             |   var |
+| aut5                             | text                             |   var |
+| aut6                             | text                             |   var |
+| aut7                             | text                             |   var |
+| casa_editoriale                  | text                             |   var |
+| codice_inventariale              | text                             |   var |
+| collocazione                     | char                             |     1 |
+| presente                         | bool                             |     1 |
++----------------------------------+----------------------------------+-------+
+
+Table    = prelevati
++----------------------------------+----------------------------------+-------+
+|              Field               |              Type                | Length|
++----------------------------------+----------------------------------+-------+
+| nome_utente                      | text                             |   var |
+| cognome_utente                   | text                             |   var |
+| scaffale                         | char                             |     1 |
+| numero                           | int4                             |     4 |
+| data_out                         | abstime                          |     4 |
+| data_in                          | abstime                          |     4 |
++----------------------------------+----------------------------------+-------+
+
+Table    = riviste_prelevate
++----------------------------------+----------------------------------+-------+
+|              Field               |              Type                | Length|
++----------------------------------+----------------------------------+-------+
+| tipo_rivista                     | int4                             |     4 |
+| volume                           | text                             |   var |
+| numero                           | text                             |   var |
+| anno                             | int4                             |     4 |
+| nome_utente                      | text                             |   var |
+| cognome_utente                   | text                             |   var |
+| data_out                         | abstime                          |     4 |
+| data_in                          | abstime                          |     4 |
++----------------------------------+----------------------------------+-------+
+
+Table    = utenti
++----------------------------------+----------------------------------+-------+
+|              Field               |              Type                | Length|
++----------------------------------+----------------------------------+-------+
+| nome                             | text                             |   var |
+| cognome                          | text                             |   var |
+| titolo                           | text                             |   var |
+| telefono                         | text                             |   var |
+| e_mail                           | text                             |   var |
+| carta_identita                   | text                             |   var |
+| comune_carta                     | text                             |   var |
++----------------------------------+----------------------------------+-------+

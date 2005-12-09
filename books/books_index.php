@@ -38,6 +38,10 @@
             <td><input type="text" name="f_editor" size="30" align="absmiddle"></td>
         </tr>
         <tr>
+            <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Collocation</font></td>
+            <td><input type="text" name="f_collocation" size="11" align="absmiddle"></td>
+        </tr>
+        <tr>
             <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Shelf&nbsp;/&nbsp;Number</font></td>
             <td>
                 <input type="text" name="f_shelf"  maxlength="1" size="3" align="absmiddle">&nbsp;/&nbsp;
@@ -49,20 +53,23 @@
             <td>
                 <input type="submit" name="submit" value="Search">
                 <select name="f_logical_op" size="1">
-    	    	    <option value="OR">Any of the words listed</option>
     	    	    <option value="AND">All the words listed</option>
-                </select>
-                <select name="f_order" size="1">
-    	    	    <option value="t">Sorted by title</option>
-    	    	    <option value="c">Sorted by collocation</option>
-                    <option value="u">Unsorted</option>
-                </select>
+    	    	    <option value="OR">Any of the words listed</option>
+                </select><br>
+                <br>
+                <input type="radio" name="f_order" value="c" checked>Sorted by collocation<br>
+                <input type="radio" name="f_order" value="t">Sorted by title<br>
+                <input type="radio" name="f_order" value="u">Unsorted<br>
             </td>
         </tr>
         </table>
         </form>
         <form action="secure/books_insert.php">
             <input type="submit" value="Insert a new book">
+        </form>
+        <form action="secure/books_check_drawn.php">
+            <input type="hidden" name="f_order" value="c">
+            <input type="submit" value="Check drawn">
         </form>
         <a href="javascript:history.back(1)">Back</a> to previous screen.
         </font>

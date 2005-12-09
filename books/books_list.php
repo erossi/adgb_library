@@ -13,6 +13,7 @@
         print 'aut 2 is: ' . $f_aut2 . '<br>';
         print 'aut 3 is: ' . $f_aut3 . '<br>';
         print 'editor is: ' . $f_editor . '<br>';
+        print 'collocation is: ' . $f_collocation . '<br>';        
         print 'shelf/number is: ' . $f_shelf . ', ' . $f_number . '<br>';
         print 'logical op 1 is: ' . $f_logical_op . '<br>';
     };
@@ -23,57 +24,68 @@
             if ($where) {
                 $where=$where . " " . $f_logical_op . " info ~* '$f_info'";
             } else {
-                $where="info ~* '$f_info'";
+                $where=" info ~* '$f_info'";
             };
         };
         if ($f_auth1) {
             if ($where) {
                 $where=$where . " " . $f_logical_op . " aut1 ~* '$f_auth1'";
             } else {
-                $where="aut1 ~* '$f_auth1'";
+                $where=" aut1 ~* '$f_auth1'";
             };
         };
         if ($f_auth2) {
             if ($where) {
                 $where=$where . " " . $f_logical_op . " aut2 ~* '$f_auth2'";
             } else {
-                $where="aut2 ~* '$f_auth2'";
+                $where=" aut2 ~* '$f_auth2'";
             };
         };
         if ($f_auth3) {
             if ($where) {
                 $where=$where . " " . $f_logical_op . " aut3 ~* '$f_auth3'";
             } else {
-                $where="aut3 ~* '$f_auth3'";
+                $where=" aut3 ~* '$f_auth3'";
             };
         };
         if ($f_editor) {
             if ($where) {
-                $where=$where . " " . $f_logical_op . "editor ~* '$f_editor'";
+                $where=$where . " " . $f_logical_op . " casa_editoriale ~* '$f_editor'";
             } else {
-                $where="casa_editoriale ~* '$f_editor'";
+                $where=" casa_editoriale ~* '$f_editor'";
+            };
+        };
+        if ($f_collocation) {
+            if ($where) {
+                $where=$where . " " . $f_logical_op . " collocazione ~* '$f_collocation'";
+            } else {
+                $where=" collocazione ~* '$f_collocation'";
             };
         };
         if ($f_shelf) {
             if ($where) {
-                $where=$where . " " . $f_logical_op . "shelf ~* '$f_shelf'";
+                $where=$where . " " . $f_logical_op . " scaffale ~* '$f_shelf'";
             } else {
-                $where="scaffale ~* '$f_shelf'";
+                $where=" scaffale ~* '$f_shelf'";
             };
         };
         if ($f_number) {
             if ($where) {
-                $where=$where . " " . $f_logical_op . "number ~* '$f_number'";
+                $where=$where . " " . $f_logical_op . " numero = '$f_number'";
             } else {
-                $where=" number~* '$f_number'";
+                $where=" numero = '$f_number'";
             };
         };
     };
- 
+
     // toglie tutti gli slashes 
     $where=stripslashes($where);
     // codifica la where clause per poterla trasferire via URL
     $where_encoded=urlencode($where);
+    // debug
+    if ($DEBUG) {
+        print "Where clause is: " . $where;
+    }
     // if there is something we add "where " at the where clause
     if ($where) { $where_clause=" WHERE " . $where; }
     // order by...
@@ -85,11 +97,11 @@
     }
 
     // connessione al database
-    $conn=db_connect($db_host,$db_port,$db_name,$db_user);    
+    $conn=db_connect($db_host,$db_port,$db_name,$db_user);
 
     // leggo gli articoli
     $query="SELECT count(*) FROM libri" . $where_clause;
-    if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };    
+    if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };
     $result = db_execute($conn,$query);
     
     // conto il numero di linee trovate (count ritorna sempre qualcosa).
