@@ -12,7 +12,7 @@
 <font face="arial,helvetica,sans-serif" size="2">
 
 
-<? print_navigation('Modify a book','Home Page','../contents.php','Books','../books_index.php'); ?>
+<? print_navigation('Modify a book','Home Page','../../contents.php','Books','../books_index.php'); ?>
 <? print_title('Modify  a book'); ?>
 
 <?
@@ -29,7 +29,7 @@
     print '    <font face="arial,helvetica,sans-serif" size="2">';
    
     $errori=0;
-    if ($f_title == '') { print '<b>Warning:</b> You must insert a title.<br>'; $errori++; }
+    if ($f_title == "") { print '<b>Warning:</b> You must insert a title.<br>'; $errori++; }
     // termina con un messaggio se ci sono errori
     if ($errori > 0 ) {
         print '     <br>There are <b>' . $errori . '</b> error(s). Please go <a href="javascript:history.back(1)">back</a> and modify insert string.';

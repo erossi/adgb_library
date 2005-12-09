@@ -12,7 +12,7 @@
 <font face="arial,helvetica,sans-serif" size="2">
 
 
-<? print_navigation('Insert a new book','Home Page','../contents.php','Books','../books_index.php'); ?>
+<? print_navigation('Insert a new book','Home Page','../../contents.php','Books','../books_index.php'); ?>
 <? print_title('Insert a new book'); ?>
 
 <table align="center" width="90%" cellspacing="1" cellpadding="3" border="0">

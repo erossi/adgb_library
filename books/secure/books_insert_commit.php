@@ -12,7 +12,7 @@
 <font face="arial,helvetica,sans-serif" size="2">
 
 
-<? print_navigation('Insert a new book','Home Page','../contents.php','Books','../books_index.php'); ?>
+<? print_navigation('Insert a new book','Home Page','../../contents.php','Books','../books_index.php'); ?>
 <? print_title('Insert a new book'); ?>
 
 <?
@@ -23,20 +23,20 @@
     print '    <font face="arial,helvetica,sans-serif" size="2">';
    
     $errori=0;
-    if ($f_title == '') { print '<b>Warning:</b> You must insert a title.<br>'; $errori++; }
+    if ($f_title == "") { print '<b>Warning:</b> You must insert a title.<br>'; $errori++; }
     $f_collocation=strtoupper($f_collocation);
-    if ($f_collocation == '') {
+    if ($f_collocation == "") {
         print '<b>Warning:</b> You must insert collocation.<br>'; $errori++;
     } else {
         if (!ereg("[A-Z]{1}",$f_collocation)) { print '<b>Warning:</b> Collocation can be a character from A to Z.<br>'; $errori++; }
     }
     $f_shelf=strtoupper($f_shelf);
-    if ($f_shelf == '') {
+    if ($f_shelf == "") {
         print '<b>Warning:</b> You must insert shelf.<br>'; $errori++;
     } else {
         if (!ereg("[A-Z]{1}",$f_shelf)) { print '<b>Warning:</b> Shelf can be a character from A to Z.<br>'; $errori++; }
     }
-    if ($f_number == '') {
+    if ($f_number == "") {
         print '<b>Warning:</b> Number on the shelf missing.<br>'; $errori++;
     } else {
         if (!ereg("[0-9]{1,3}",$f_number)) { print '<b>Warning:</b> Number on the shelf invalid.<br>'; $errori++; }

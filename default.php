@@ -6,7 +6,7 @@
 <?
     // inforazioni riguardanti la gestione web
     $prog_name = "Library";
-    $prog_version = "0.5";
+    $prog_version = "0.6";
     
     // debug
     $DEBUG = false;
@@ -20,5 +20,5 @@
     // numero massimo di righe per ogni tabella stampata
     // (in pratica ogni tabella viene raggruppata in sottotabelle con tante righe
     // quante sono indicate sotto).
-    $max_table_rows = 50;
+    $max_table_rows = 15;
 ?>

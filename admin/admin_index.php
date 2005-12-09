@@ -17,6 +17,9 @@
                 <form action="admin_list.php">
                     <input type="submit" name="submit" value="Administrators list" width="50%">
                 </form>
+                <form action="admin_insert.php">
+                    <input type="submit" name="submit" value="Add an administrator" width="50%">
+                </form>
             </td>
         </tr>
         </table>

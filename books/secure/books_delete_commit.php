@@ -12,7 +12,7 @@
 <font face="arial,helvetica,sans-serif" size="2">
 
 
-<? print_navigation('Delete a book','Home Page','../contents.php','Books','../books_index.php'); ?>
+<? print_navigation('Delete a book','Home Page','../../contents.php','Books','../books_index.php'); ?>
 <? print_title('Delete a book'); ?>
 
 <?
