@@ -1,60 +1,59 @@
-<?php if (file_exists('../../default.php')) { include '../../default.php'; } ?>
+<? if (file_exists('../../default.php')) { include '../../default.php'; } ?>
+<? if (file_exists('../../procedure/utility.php')) { include '../../procedure/utility.php'; } ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-    <TITLE><?php print $prog_name; ?> - Articles</TITLE>
-    <LINK REL="STYLESHEET" HREF="../../library.css">
-</HEAD>
-<BODY TEXT="Black" BGCOLOR="White" LINK="#CC9966" ALINK="#CC9966" VLINK="#CC9966">
+<html>
+<head>
+    <title><? print $prog_name ?> - Articles</title>
+    <link rel="stylesheet" href="../../library.css">
+</head>
+<body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
 
-<!-- Header -->
-<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0" BORDER="0">
-<TR>
-    <TD ALIGN="LEFT">
-    <FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2">
-    &nbsp;Navigate: <A HREF="../../contents.php" TARGET="contents">Home Page</A> : <A HREF="../articles_index.php" TARGET="contents">Articles</A> : Delete an article
-    </FONT>
-    </TD>
-</TR>
-</TABLE>
+<font face="arial,helvetica,sans-serif" size="2">
 
-<!-- Title -->
-<CENTER><H2>Delete an article</H2></CENTER>
-<?php
-    // controllo i parametri
-    if (!$oid) { 
-        print "You don't have selected nothing";
-        exit;
-    };
-    
+<? print_top($prog_name); ?>
+<? print_navigation('Delete an article','Home Page','../../contents.php','Articles','../articles_index.php'); ?>
+<? print_title('Delete an article'); ?>
+
+<?
     // connessione al database
-    if (file_exists('../../procedure/connect_db.php')) { include '../../procedure/connect_db.php'; }
+    $conn=db_connect($db_host,$db_port,$db_name,$db_user);  
 
     // leggo gli articoli
     $query="SELECT oid,* FROM articoli WHERE oid=" . $oid;
-    $result = pg_Exec ($conn,$query);
+    $result=db_execute($conn,$query);
     if ($DEBUG) { print 'Query: <B>' . $query . '</B><BR>'; };
-    if (!$result) {
-        if ($DEBUG) { print 'File articles_delete error: cannot execute query.\n'; };
-        exit;
-    };
-
+    // leggo i dati
     $arr=pg_fetch_array ($result, 0);
    
     // chiudo la connessione
-    pg_close ($conn);
+    db_close($conn);
 ?>
 
-<UL>
-    <LI>You have requested to delete this article:<BR><BR>
-        <I><?php print $arr["articolo"]; ?></I><BR><BR>
-    <LI>Do you really want to delete the above article ?
-    <UL>
-        <LI><?php print '<A HREF="articles_delete_commit.php?oid=' . $oid . '&where=' . urlencode(stripslashes($where)) . '">Yes, delete!</A><BR>'; ?>
-        <LI><?php print '<A HREF="../articles_list.php?oid=' . $oid . '&where=' . urlencode(stripslashes($where)) . '">Oops, cancel operation</A><BR>'; ?>
-    </UL>
-</UL>
+<table align="center" width="90%" cellspacing="1" cellpadding="3" border="0">
+<tr>
+    <td align="left" valign="top" width="70%" bgcolor="#e0e0e0">
+        <font face="arial,helvetica,sans-serif" size="2">
+        You have requested to delete this article:<br><br>
+        <table cellspacing="1" cellpadding="3" border="0">
+        <tr>
+            <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white"><br>Description<br><br></font></td>
+            <td align="left"  valign="middle"><textarea name="note" rows="6" cols="65"><? print $arr['articolo']; ?></textarea></td>
+        </tr>
+        </table>
+        <form action="articles_delete_commit.php">
+            <input type="hidden" name="oid" value="<? print $oid; ?>">
+            <input type="submit" value="Ok ,delete">
+        </form>
+        <form action="../articles_index.php">
+            <input type="submit" value="Oops, cancel operation!">
+        </form>
+        &nbsp;<a href="javascript:history.back(1)"><img src="../../icone/ico-back.png" width="12" height="12" hspace="3" border="0" align="absmiddle">Back</a> to previous screen.
+        </font>
+    </td>
+</table>
 
-</BODY>
-</HTML>
+</font>
+
+</body>
+</html>

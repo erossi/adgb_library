@@ -1,15 +1,15 @@
-<?php if (file_exists('default.php')) { include 'default.php'; } ?>
+<? if (file_exists('default.php')) { include 'default.php'; } ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-    <TITLE><?php print $prog_name; ?></TITLE>
-</HEAD>
+<html>
+<head>
+    <title><? print $prog_name; ?></title>
+</head>
 
-<FRAMESET ROWS="25,*,25" BORDER="0" FRAMEBORDER="0" FRAMESPACING="0">
-    <FRAME NAME="top"      SRC="top.php"      MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="no"   FRAMEBORDER="0" NORESIZE>
-    <FRAME NAME="contents" SRC="contents.php" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="auto" FRAMEBORDER="0">
-    <FRAME NAME="bottom"   SRC="bottom.php"   MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="no"   FRAMEBORDER="0" NORESIZE>
-</FRAMESET>
+<frameset rows="25,*,25" border="0" frameborder="0" framespacing="0">
+    <frame name="top"      src="top.php"      marginwidth="0" marginheight="0" scrolling="no"   frameborder="0" noresize>
+    <frame name="contents" src="contents.php" marginwidth="0" marginheight="0" scrolling="auto" frameborder="0">
+    <frame name="bottom"   src="bottom.php"   marginwidth="0" marginheight="0" scrolling="no"   frameborder="0" noresize>
+</frameset>
 
-</HTML>
+</html>

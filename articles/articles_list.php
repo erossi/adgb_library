@@ -1,28 +1,21 @@
-<?php if (file_exists('../default.php')) { include '../default.php'; } ?>
+<? if (file_exists('../default.php')) { include '../default.php'; } ?>
+<? if (file_exists('../procedure/utility.php')) { include '../procedure/utility.php'; } ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-    <title><?php print $prog_name; ?> - Articles</title>
+    <title><? print $prog_name ?> - Books</title>
     <link rel="stylesheet" href="../library.css">
 </head>
 <body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
 
-<!-- header -->
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-    <td align="left">
-    <font face="arial,helvetica,sans-serif" size="2">
-    &nbsp;Navigate: <a href="../contents.php" target="contents">Home page</a> : <a href="articles_index.php" target="contents">Articles</a> : Articles list
-    </font>
-    </td>
-</tr>
-</table>
+<font face="arial,helvetica,sans-serif" size="2">
 
-<!-- title -->
-<center><h2>Articles list</h2></center>
+<? print_top($prog_name); ?>
+<? print_navigation('Articles list','Home Page','../contents.php','Articles','articles_index.php'); ?>
+<? print_title('Articles list'); ?>
 
-<?php
+<?
     // controllo i parametri
     if ($DEBUG) { 
         print 'string 1 is: ' . $string1 . '<br>';
@@ -49,30 +42,21 @@
             };
         };
     }
-    
+
+    // toglie tutti gli slashes 
     $where=stripslashes($where);
-        
+    // codifica la where clause per poterla trasferire via URL
     $where_encoded=urlencode($where);
-    if ($DEBUG) { 
-        print 'The where is: ' . $where . '<br>';
-        print 'The where encoded is: ' . $where_encoded . '<br>';
-    };        
-        
     // if there is something we add "where " at the where clause
-    if ($where) { $where_clause="WHERE " . $where; };
-    if ($DEBUG) { print 'The where clause is: ' . $where_clause . '<br>'; };        
+    if ($where) { $where_clause=" WHERE " . $where; }
 
     // connessione al database
-    if (file_exists('../procedure/connect_db.php')) { include '../procedure/connect_db.php'; }
+    $conn=db_connect($db_host,$db_port,$db_name,$db_user);    
 
     // leggo gli articoli
-    $query="SELECT count(*) FROM articoli " . $where_clause;
-    $result = pg_exec ($conn,$query);
-    if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };
-    if (!$result) {
-        if ($DEBUG) { print 'file articles_list error: cannot execute query.\n'; };
-        exit;
-    };
+    $query="SELECT count(*) FROM articoli" . $where_clause;
+    if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };    
+    $result = db_execute($conn,$query);
     
     // conto il numero di linee trovate (count ritorna sempre qualcosa).
     $arr=pg_fetch_array ($result,0);
@@ -80,36 +64,52 @@
     if ($DEBUG) { print 'Total lines found: ' . $num_rows . '<br>'; };
 
     if ($num_rows=='0') {
-        print '<ul>';
-        print '    <li>No articles found.';
-        print '</ul>';
+        echo "<ul>\n";
+        echo "  <li>No articles found.\n";
+        echo "</ul>\n";
     } else {
-        // legenda
-        print '<div align="right">';
-        print '&nbsp;<img src="../icone/ico_edit.gif" width="17" height="15" border="0"> = Edit&nbsp;';
-        print '&nbsp;<img src="../icone/ico_delete.gif" width="17" height="15" border="0"> = Delete&nbsp;';
-        print '</div>';
-        
         // stampo l'indice
-        print '<table cellspacing="1" cellpadding="2" border="0" width="100%">';
-        print '<tr bgcolor="black">';
-        print '<td  width="5%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Num.</font></td>';
-        print '<td width="95%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">&nbsp;';
-       
+        echo "<div align=\"center\">\n";
+        echo "<table cellspacing=\"1\" cellpadding=\"3\" border=\"0\" width=\"90%\">\n";
+        echo "<tr bgcolor=\"white\">\n";
+        echo "    <td width=\"5%\" align=\"left\" valign=\"top\"><font face=\"arial,helvetica,sans-serif\" size=\"2\">Index:</font></td>\n";
+        echo "    <td width=\"95%\" align=\"left\" valign=\"top\"><font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
         for ($count=0; $count<$num_rows; $count+=$max_table_rows) {
             $temp_to=$count+$max_table_rows-1;
             if ($temp_to>$num_rows) { $temp_to=$num_rows-1; };
-            print '<a href="articles_list.php?from=' . $count . '&to=' . $temp_to . '&where=' . $where_encoded . '">' . $count . '</a> &nbsp;';
+            echo "        <a href=\"articles_list.php?from=" . $count . "&to=" . $temp_to . "&order=" . $order . "&where=" . $where_encoded . "\">" . $count . "</a> &nbsp;\n";
         }
-        print ': Total ' . $num_rows;
-        print '</font></td></tr></table>';
+        echo ": Total " . $num_rows . "\n";
+        echo "    </font></td>\n";
+        echo "</tr>\n";
+        echo "</table>\n";
+        echo "</div>\n";
         
+        // legenda
+        echo "<div align=\"center\">\n";
+        echo "<table cellspacing=\"1\" cellpadding=\"3\" border=\"0\" width=\"90%\">\n";        
+        echo "<tr>\n";
+        echo "<td align=\"right\" valign=\"middle\" bgcolor=\"white\">\n";
+        echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+        echo "    &nbsp;<img src=\"../icone/ico_protected.gif\" width=\"45\" height=\"15\" border=\"0\" hspace=\"5\" align=\"absmiddle\" alt=\"This links are password protected\" align=\"absmiddle\">&nbsp;Password protected links: \n";
+        echo "    </font>\n";
+        echo "</td>\n";
+        echo "<td align=\"left\" valign=\"middle\" bgcolor=\"#ffc1c1\">\n";
+        echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+        echo "    &nbsp;<img src=\"../icone/ico_edit.gif\"    width=\"20\" height=\"20\" border=\"0\" align=\"absmiddle\"> = Edit&nbsp;\n";
+        echo "    &nbsp;<img src=\"../icone/ico_delete.gif\"  width=\"20\" height=\"20\" border=\"0\" align=\"absmiddle\"> = Delete&nbsp;\n";
+        echo "    </font>\n";
+        echo "</td>\n";
+        echo "</tr>\n"; 
+        echo "</table>\n";
+        echo "</div>\n";
+
         // stampo il risultato
-        $query="SELECT oid,* FROM articoli " . $where_clause;
-        $result = pg_exec ($conn,$query);
+        $query="SELECT oid,* FROM articoli" . $where_clause;
+        $result = db_execute($conn,$query);
         if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };
         if (!$result) {
-            if ($DEBUG) { print 'file articles_list error: cannot execute query.\n'; };
+            if ($DEBUG) { print 'file books_list error: cannot execute query.\n'; };
             exit;
         };
        
@@ -123,37 +123,47 @@
         // you cannot exceed number of row reported by database.
         if ($to>$num_rows) { $to=$num_rows-1; };
         if ($DEBUG) { print 'Index: <b>from=' . $from . ', to=' . $to . '</b>'; };
-    
-        print '<table cellspacing="1" cellpadding="2" border="0" width="100%">';
-        print '<tr bgcolor="black">';
-        print '<td width="5%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Num.</font></td>';
-        print '<td><font face="arial,helvetica,sans-serif" size="2" style="color: white">Article description</font></td>';
-        print '<td width="10%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Operation</font></td>';
-        for ($count=$from; $count<=$to; $count++)
+
+        print '<div align="center">';
+        print '<table cellspacing="1" cellpadding="3" border="0" width="90%">';
+        print '<tr bgcolor="#336699">';
+        print '    <td width="5%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Num.</font></td>';
+        print '    <td width="80%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Article description</font></td>';
+        print '    <td width="15%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Operation</font></td>';
+        for ($count=$from; $count<=$to; $count++)        
         {
-            $arr=pg_fetch_array ($result, $count);
+            $arr=pg_fetch_array ($result,$count);
             if (($count % 2) == 0) {
-                print '<tr bgcolor="#33cc99">';
+                echo "<tr bgcolor=\"#e0e0e0\">\n";
             } else {
-                print '<tr bgcolor="white">';
+                echo "<tr bgcolor=\"white\">\n";
             };
-            print '<td valign="top"><font face="arial,helvetica,sans-serif" size="2">' . $count;
-            if ($DEBUG) {
-                print '<br><i>' . $arr['oid'] . '</i>';
-            }
-            print '</font></td>';
-            print '<td valign="top"><font face="arial,helvetica,sans-serif" size="2">' . $arr['articolo'] . '</font></td>';
-            print '<td valign="top">';
-            print '    <a href="secure/articles_modify.php?oid=' . $arr['oid'] . '&where=' . $where_encoded . '"><img src="../icone/ico_edit.gif" width="17" height="15" border="0">';
-            print '    <a href="secure/articles_delete.php?oid=' . $arr['oid'] . '&where=' . $where_encoded . '"><img src="../icone/ico_delete.gif" width="17" height="15" border="0">';
+
+            // 1st column
+            echo "<td valign=\"top\" width=\"5%\">\n";
+            echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+            echo "    " . $count . "<br>\n";
+            if ($DEBUG) { print '<i>' . $arr['oid'] . '</i>'; }
+            echo "    </font>\n";
+            echo "</td>\n";
+            // 2nd column
+            echo "<td valign=\"top\" width=\"5%\">\n";
+            echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">" . $arr['articolo'] . "</font>\n";
+            echo "</td>\n";
+            // 3rd column
+            print '<td valign="top" bgcolor="#ffc1c1" width="10%">';
+            print '    <a href="secure/articles_modify.php?oid=' . $arr['oid'] . '"><img src="../icone/ico_edit.gif" width="20" height="20" border="0" alt="Modify information for this book"></a>';
+            print '    <a href="secure/articles_delete.php?oid=' . $arr['oid'] . '"><img src="../icone/ico_delete.gif" width="20" height="20" border="0" alt="Delete this book"></a>';
             print '</td>';
-            print '</tr>';
+            echo "</tr>\n";
         };
-        print '</table>';
+        echo "</table>\n";
     }
     // chiudo la connessione
-    pg_close ($conn);
+    db_close($conn);
 ?>
+
+</font>
 
 </body>
 </html>

@@ -1,6 +1,5 @@
-<?php if (file_exists('../default.php')) { include '../default.php'; } ?>
-
-<?php if (file_exists('../procedure/review_head.php')) { include '../procedure/review_head.php'; } ?>
+<? if (file_exists('../default.php')) { include '../default.php'; } ?>
+<? if (file_exists('../procedure/review_head.php')) { include '../procedure/review_head.php'; } ?>
 
 <!-- Header -->
 <TABLE BGCOLOR="#000000" WIDTH="100%" CELLSPACING="1" CELLPADDING="2" BORDER="0">

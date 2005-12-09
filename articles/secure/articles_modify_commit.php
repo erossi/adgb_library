@@ -1,55 +1,49 @@
-<?php if (file_exists('../../default.php')) { include '../../default.php'; } ?>
+<? if (file_exists('../../default.php')) { include '../../default.php'; } ?>
+<? if (file_exists('../../procedure/utility.php')) { include '../../procedure/utility.php'; } ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-    <title>Library - Articles</title>
+    <title><? print $prog_name ?> - Articles</title>
     <link rel="stylesheet" href="../../library.css">
 </head>
 <body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
 
-<!-- header -->
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<font face="arial,helvetica,sans-serif" size="2">
+
+<? print_top($prog_name); ?>
+<? print_navigation('Modify an article','Home Page','../../contents.php','Articles','../articles_index.php'); ?>
+<? print_title('Modify an article'); ?>
+
+<?
+    // connessione al database
+    $conn=db_connect($db_host,$db_port,$db_name,$db_user);
+
+    // leggo gli articoli
+    $query="UPDATE articoli SET articolo='" . $note . "' WHERE oid=" . $oid;
+    $result=db_execute($conn,$query);
+
+    // chiudo la connessione
+    db_close($conn);
+?>
+
+<table align="center" width="90%" cellspacing="1" cellpadding="3" border="0">
 <tr>
-    <td align="left">
-    <font face="arial,helvetica,sans-serif" size="2">
-    &nbsp;navigate: <a href="../../contents.php" target="contents">Home page</a> : <a href="../articles_index.php" target="contents">Articles</a> : Modify an article
-    </font>
+    <td align="left" valign="top" width="70%" bgcolor="#e0e0e0">
+        <font face="arial,helvetica,sans-serif" size="2">
+        Article saved.<br>
+        <form action="../articles_list.php">
+            <input type="submit" name="submit" value="Go to Article List">
+        </form>
+        <form action="../articles_index.php">
+            <input type="submit" name="submit" value="Return to Articles Menu">
+        </form>
+        </font>
     </td>
 </tr>
 </table>
 
-<!-- title -->
-<center><h2>Modify an article</h2></center>
-<?php
-    // controllo i parametri
-    if (!$oid) { 
-        print "you don't have selected nothing";
-        exit;
-    };
-    
-    // connessione al database
-    if (file_exists('../../procedure/connect_db.php')) { include '../../procedure/connect_db.php'; }
-
-    // leggo gli articoli
-    $query="UPDATE articoli SET articolo='" . $note . "' WHERE oid=" . $oid;
-    $result = pg_exec ($conn,$query);
-    if ($debug) { print 'Query: <b>' . $query . '</b><br>'; };
-    if (!$result) {
-        if ($debug) { print 'file articles_delete_commit error: cannot execute query.\n'; };
-        exit;
-    };
-
-    // chiudo la connessione
-    pg_close ($conn);
-?>
-
-<ul>
-    <li>&nbsp;Article modified. Now you can:<br>
-    <ul>
-        <li><?php print '<a href="../articles_index.php">Return to articles menu</a><br>'; ?>
-    </ul>    
-</ul>
+</font>
 
 </body>
 </html>

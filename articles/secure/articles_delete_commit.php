@@ -1,56 +1,49 @@
-<?php if (file_exists('../../default.php')) { include '../../default.php'; } ?>
+<? if (file_exists('../../default.php')) { include '../../default.php'; } ?>
+<? if (file_exists('../../procedure/utility.php')) { include '../../procedure/utility.php'; } ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-    <TITLE>Library - Articles</TITLE>
-    <LINK REL="STYLESHEET" HREF="../../library.css">
-</HEAD>
-<BODY TEXT="Black" BGCOLOR="White" LINK="#CC9966" ALINK="#CC9966" VLINK="#CC9966">
+<html>
+<head>
+    <title><? print $prog_name ?> - Articles</title>
+    <link rel="stylesheet" href="../../library.css">
+</head>
+<body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
 
-<!-- Header -->
-<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0" BORDER="0">
-<TR>
-    <TD ALIGN="LEFT">
-    <FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2">
-    &nbsp;Navigate: <A HREF="../../contents.php" TARGET="contents">Home Page</A> : <A HREF="../articles_index.php" TARGET="contents">Articles</A> : Delete an article
-    </FONT>
-    </TD>
-</TR>
-</TABLE>
+<font face="arial,helvetica,sans-serif" size="2">
 
-<!-- Title -->
-<CENTER><H2>Delete an article</H2></CENTER>
-<?php
-    // controllo i parametri
-    if (!$oid) { 
-        print "You don't have selected nothing";
-        exit;
-    };
-    
+<? print_top($prog_name); ?>
+<? print_navigation('Delete an article','Home Page','../../contents.php','Articles','../articles_index.php'); ?>
+<? print_title('Delete an article'); ?>
+
+<?
     // connessione al database
-    if (file_exists('../../procedure/connect_db.php')) { include '../../procedure/connect_db.php'; }
+    $conn=db_connect($db_host,$db_port,$db_name,$db_user);
 
     // leggo gli articoli
     $query="DELETE from articoli WHERE oid=" . $oid;
-    $result = pg_Exec ($conn,$query);
-    if ($DEBUG) { print 'Query: <B>' . $query . '</B><BR>'; };
-    if (!$result) {
-        if ($DEBUG) { print 'File articles_delete_commit error: cannot execute query.\n'; };
-        exit;
-    };
+    $result=db_execute($conn,$query);
 
     // chiudo la connessione
-    pg_close ($conn);
+    db_close($conn);
 ?>
 
-<UL>
-    <LI>&nbsp;Article deleted. Now you can:<BR>
-    <UL>
-        <LI><?php print '<A HREF="../articles_list.php?oid=' . $oid . '&where=' . urlencode(stripslashes($where)) . '">Select another article to delete from prevoius group</A><BR>'; ?>
-        <LI><?php print '<A HREF="../articles_index.php?oid=' . $oid . '&where=' . urlencode(stripslashes($where)) . '">Return to articles menu</A><BR>'; ?>
-    </UL>    
-</UL>
+<table align="center" width="90%" cellspacing="1" cellpadding="3" border="0">
+<tr>
+    <td align="left" valign="top" width="70%" bgcolor="#e0e0e0">
+        <font face="arial,helvetica,sans-serif" size="2">
+        Article deleted.<br>
+        <form action="../articles_list.php">
+            <input type="submit" name="submit" value="Go to Article List">
+        </form>
+        <form action="../articles_index.php">
+            <input type="submit" name="submit" value="Return to Articles Menu">
+        </form>
+        </font>
+    </td>
+</tr>
+</table>
 
-</BODY>
-</HTML>
+</font>
+
+</body>
+</html>

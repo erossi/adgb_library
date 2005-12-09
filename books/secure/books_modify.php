@@ -1,112 +1,121 @@
-<?php if (file_exists('../../default.php')) { include '../../default.php'; } ?>
+<? if (file_exists('../../default.php')) { include '../../default.php'; } ?>
+<? if (file_exists('../../procedure/utility.php')) { include '../../procedure/utility.php'; } ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-    <title><?php print $prog_name; ?> - Books</title>
+    <title><? print $prog_name ?> - Books</title>
     <link rel="stylesheet" href="../../library.css">
 </head>
 <body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
 
 <font face="arial,helvetica,sans-serif" size="2">
 
-<!-- header -->
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-    <td align="left">
-    <font face="arial,helvetica,sans-serif" size="2">
-    &nbsp;Navigate: <a href="../../contents.php" target="contents">Home page</a> : <a href="../books_index.php" target="contents">Books</a> : Modify a book
-    </font>
-    </td>
-</tr>
-</table>
+<? print_top($prog_name); ?>
+<? print_navigation('Modify a book','Home Page','../contents.php','Books','../books_index.php'); ?>
+<? print_title('Modify  a book'); ?>
 
-<!-- title -->
-<center><h2>Modify a book</h2></center>
-
-<?php
+<?
     // connessione al database
-    if (file_exists('../../procedure/connect_db.php')) { include '../../procedure/connect_db.php'; }
+    $conn=db_connect($db_host,$db_port,$db_name,$db_user);
 
     // stampo il risultato
     $query="SELECT oid,* FROM libri WHERE oid=" . $oid;
-    $result = pg_exec ($conn,$query);
     if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };
-    if (!$result) {
-        if ($DEBUG) { print 'file books_info error: cannot execute query.\n'; };
-        exit;
-    };
+        
+    $result = db_execute($conn,$query);    
 
     // leggo in un array il risultato
     $arr=pg_fetch_array($result,0);
 
-    print '<ul>';
-    print '<li>Edit values then press "Commit changes":';
-    print '<form method="post" action="books_modify_commit.php?oid=' . $oid . '">';
-    print '<table cellspacing="2" cellpadding="2" border="0">';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Title</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="titolo" size="30" align="absmiddle" value="' . $arr['titolo'] . '">&nbsp;(&nbsp;<input type="text" name="info" size="15" align="absmiddle" value="' . $arr['info'] . '">&nbsp;)</td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Author nr. 1</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="aut1" size="30" align="absmiddle" value="' . $arr['aut1'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">nr. 2</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="aut2" size="30" align="absmiddle" value="' . $arr['aut2'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>'; 
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">nr. 3</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="aut3" size="30" align="absmiddle" value="' . $arr['aut3'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">nr. 4</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="aut4" size="30" align="absmiddle" value="' . $arr['aut4'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">nr. 5</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="aut5" size="30" align="absmiddle" value="' . $arr['aut5'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">nr. 6</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="aut6" size="30" align="absmiddle" value="' . $arr['aut6'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">nr. 7</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="aut7" size="30" align="absmiddle" value="' . $arr['aut7'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Editor</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="editore" size="30" align="absmiddle" value="' . $arr['casa_editoriale'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Inventory code</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="codice_inventariale" size="30" align="absmiddle" value="' . $arr['codice_inventariale'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Collocation</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="collocazione" size="30" align="absmiddle" value="' . $arr['collocazione'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Shelf</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="scaffale" size="30" maxlength="1" align="absmiddle" value="' . $arr['scaffale'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Number</font></td>';
-    print '        <td align="left"  valign="middle"><input type="text" name="numero" size="30" maxlength="3" align="absmiddle" value="' . $arr['numero'] . '"></td>';
-    print '    </tr>';
-    print '    <tr>';
-    print '        <td>&nbsp</td>';
-    print '        <td><input type="submit" name="submit" value="Commit changes">&nbsp;<input type="reset" name="reset" value="Reset values"></td>';
-    print '    </tr>';
-    print '    </table><br><br>';
-    print '<li><a href="javascript:history.back(1)">Back</a> to the previous screen.';
-    print '</ul>';
+	echo "<table align=\"center\" width=\"90%\" cellspacing=\"1\" cellpadding=\"3\" border=\"0\">\n";
+	echo "<tr>\n";
+	echo "    <td align=\"left\" valign=\"top\" width=\"70%\" bgcolor=\"#e0e0e0\">\n";
+	echo "        <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+	echo "        Please modify book information then press <b>Modify</b> button:<br>\n";
+	echo "        <form action=\"books_modify_commit.php?oid=" . $oid . "\">\n";
+	echo "        <table cellspacing=\"1\" cellpadding=\"3\" border=\"0\">\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">Title (Info)</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><input type=\"text\" name=\"f_title\" value=\"" . $arr['titolo'] . "\" size=\"30\" align=\"absmiddle\">&nbsp;(&nbsp;<input type=\"text\" name=\"f_info\" value=\"" . $arr['info'] . "\"  size=\"15\" align=\"absmiddle\">&nbsp;)</td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">Author nr. 1</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><input type=\"text\" name=\"f_auth1\" value=\"" . $arr['aut1'] . "\" size=\"30\" align=\"absmiddle\"></td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">nr. 2</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><input type=\"text\" name=\"f_auth2\" value=\"" . $arr['aut2'] . "\" size=\"30\" align=\"absmiddle\"></td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">nr. 3</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><input type=\"text\" name=\"f_auth3\" value=\"" . $arr['aut3'] . "\" size=\"30\" align=\"absmiddle\"></td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">nr. 4</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><input type=\"text\" name=\"f_auth4\" value=\"" . $arr['aut4'] . "\" size=\"30\" align=\"absmiddle\"></td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">nr. 5</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><input type=\"text\" name=\"f_auth5\" value=\"" . $arr['aut5'] . "\" size=\"30\" align=\"absmiddle\"></td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">nr. 6</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><input type=\"text\" name=\"f_auth6\" value=\"" . $arr['aut6'] . "\" size=\"30\" align=\"absmiddle\"></td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">nr. 7</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><input type=\"text\" name=\"f_auth7\" value=\"" . $arr['aut7'] . "\" size=\"30\" align=\"absmiddle\"></td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">Editor</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><input type=\"text\" name=\"f_editor\" value=\"" . $arr['casa_editoriale'] . "\" size=\"30\" align=\"absmiddle\"></td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">Inventory code</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><input type=\"text\" name=\"f_inventory\" value=\"" . $arr['codice_inventariale'] . "\" size=\"30\" align=\"absmiddle\"></td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">Collocation</font></td>\n";
+	echo "            <td align=\"left\"  valign=\"middle\"><font face=\"arial,helvetica,sans-serif\" size=\"2\"><b>" . $arr['collocazione'] . "</b></font></td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td align=\"right\" valign=\"middle\" bgcolor=\"#336699\"><font face=\"arial,helvetica,sans-serif\" size=\"2\" color=\"white\">Shelf&nbsp;/&nbsp;Number</font></td>\n";
+	echo "            <td>\n";
+	echo "                <font face=\"arial,helvetica,sans-serif\" size=\"2\"><b>" . $arr['scaffale'] . "</b>&nbsp;/&nbsp;<b>" . $arr['numero'] . "</font></td>\n";
+	echo "            </td>\n";
+	echo "        </tr>\n";
+	echo "        <tr>\n";
+	echo "            <td>&nbsp;</td>\n";
+	echo "            <td>\n";
+    echo "                <input type=\"hidden\" name=\"oid\" value=\"" . $arr['oid'] . "\">\n";
+    echo "                <input type=\"hidden\" name=\"f_collocation\" value=\"" . $arr['collocazione'] . "\">\n";
+    echo "                <input type=\"hidden\" name=\"f_shelf\" value=\"" . $arr['scaffale'] . "\">\n";
+    echo "                <input type=\"hidden\" name=\"f_number\" value=\"" . $arr['numero'] . "\">\n";            
+    echo "                <input type=\"submit\" name=\"submit\" value=\"Modify\">&nbsp;<input type=\"reset\" name=\"reset\" value=\"Reset values\"></td>\n";
+	echo "        </tr>\n";
+	echo "        </table>\n";
+	echo "        </form>\n";
+	echo "        <a href=\"javascript:history.back(1)\">Back</a> to previous screen.\n";
+	echo "        </font>\n";
+	echo "    </td>\n";
+	echo "    <td align=\"justify\" valign=\"top\" width=\"30%\" bgcolor=\"#ffffe0\">\n";
+	echo "        <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
+	echo "        <div align=\"justify\">\n";
+	echo "        <b>On-line Help</b><br>\n";
+	echo "        <br>\n";
+	echo "        Enter title, author(s) and other informations about the book into appropriate box.<br>\n";
+	echo "        <br>\n";
+	echo "        Once you've inputted your data, hit the <i>Modify</i> button to commit work.<br>\n";
+	echo "        <br>\n";
+	echo "        Please note: it is not necessary to fill in <i>every</i> box to be able\n";
+	echo "        to insert a book, but title and an unique shelf/number are mandatory.\n";
+	echo "        </div>\n";
+	echo "        </font>\n";
+	echo "    </td>\n";
+	echo "</tr>\n";
+	echo "</table>\n";
 ?>
-
-    </form>
-</ul>
 
 </font>
 

@@ -1,71 +1,97 @@
-<?php if (file_exists('../default.php')) { include '../default.php'; } ?>
+<? if (file_exists('../default.php')) { include '../default.php'; } ?>
+<? if (file_exists('../procedure/utility.php')) { include '../procedure/utility.php'; } ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-    <title><?php print $prog_name; ?> - Books</title>
+    <title><? print $prog_name ?> - Books</title>
     <link rel="stylesheet" href="../library.css">
 </head>
 <body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
 
-<!-- header -->
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<font face="arial,helvetica,sans-serif" size="2">
+
+<? print_top($prog_name); ?>
+<? print_navigation('Books','Home Page','../contents.php'); ?>
+<? print_title('Books'); ?>
+
+<table align="center" width="90%" cellspacing="1" cellpadding="3" border="0">
 <tr>
-    <td align="left">
-    <font face="arial,helvetica,sans-serif" size="2">
-    &nbsp;Navigate: <a href="../contents.php" target="contents">Home page</a> : Books
-    </font>
-    </td>
-</tr>
-</table>
-
-<!-- title -->
-<center><h2>Books</h2></center>
-
-<ul>
-    <li>Insert information to search for then press "Search" button:<br>
+    <td align="left" valign="top" width="70%" bgcolor="#e0e0e0">
+        <font face="arial,helvetica,sans-serif" size="2">
+        Please insert information to search for then press <b>Search</b> button:<br>
         <form action="books_list.php">
-        <table cellspacing="1" cellpadding="2" border="0">
+        <table cellspacing="1" cellpadding="3" border="0">
         <tr>
-            <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Title</font></td>
-            <td><input type="text" name="title" size="30" align="absmiddle">&nbsp;(&nbsp;<input type="text" name="info" size="15" align="absmiddle">&nbsp;)</td>
+            <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Title</font></td>
+            <td><input type="text" name="f_title" size="30" align="absmiddle"></td>
         </tr>
         <tr>
-            <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Authors</font></td>
-            <td><input type="text" name="aut1" size="30" align="absmiddle"></td>
+            <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Authors</font></td>
+            <td>
+                <input type="text" name="f_auth1" size="30" align="absmiddle"><br>
+                <input type="text" name="f_auth2" size="30" align="absmiddle"><br>
+                <input type="text" name="f_auth3" size="30" align="absmiddle"><br>
+            </td>
         </tr>
         <tr>
-            <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2"></font></td>
-            <td><input type="text" name="aut2" size="30" align="absmiddle"></td>
+            <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Editor</font></td>
+            <td><input type="text" name="f_editor" size="30" align="absmiddle"></td>
         </tr>
         <tr>
-            <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2"></font></td>
-            <td><input type="text" name="aut3" size="30" align="absmiddle"></td>
-        </tr>
-        <tr>
-            <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Editor</font></td>
-            <td><input type="text" name="editor" size="30" align="absmiddle"></td>
-        </tr>
-        <tr>
-            <td align="right" valign="middle"><font face="arial,helvetica,sans-serif" size="2">Shelf / Number</font></td>
-            <td><input type="text" name="shelf" size="3" maxlength="1" align="absmiddle">&nbsp;/&nbsp;<input type="text" name="number" size="5" maxlength="3" align="absmiddle"></td>
+            <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Shelf&nbsp;/&nbsp;Number</font></td>
+            <td>
+                <input type="text" name="f_shelf"  maxlength="1" size="3" align="absmiddle">&nbsp;/&nbsp;
+                <input type="text" name="f_number" maxlength="3" size="5" align="absmiddle">
+            </td>
         </tr>
         <tr>
             <td>&nbsp</td>
-            <td><input type="submit" name="submit" value="Search">
-            <select name="logical_op" size="1">
-    	    	<option value="OR">Any of the words listed</option>
-	    	    <option value="AND">All the words listed</option>
-            </select>
+            <td>
+                <input type="submit" name="submit" value="Search">
+                <select name="f_logical_op" size="1">
+    	    	    <option value="OR">Any of the words listed</option>
+    	    	    <option value="AND">All the words listed</option>
+                </select>
+                <select name="f_order" size="1">
+    	    	    <option value="t">Sorted by title</option>
+    	    	    <option value="c">Sorted by collocation</option>
+                    <option value="u">Unsorted</option>
+                </select>
             </td>
         </tr>
         </table>
         </form>
-    <li><a href="secure/books_insert.php">Insert a new book</a>
-    (<img src="../icone/ico_protected.gif" width="45" height="15" border="0" hspace="5" vspace="2" alt="This link is password protected" align="absmiddle">Only for trusted users&nbsp;)
-    <li><a href="#" target="contents" onclick="javascript:window.open('../help/node_book_1.html','ne','scrollbars=1,location=0,menubar=0,toolbar=0,resizable=0,width=400,height=500')">Help on line</a>
-</ul>
-</form>
+        <form action="secure/books_insert.php">
+            <input type="submit" value="Insert a new book">
+        </form>
+        <a href="javascript:history.back(1)">Back</a> to previous screen.
+        </font>
+    </td>
+    <td align="justify" valign="top" width="30%" bgcolor="#ffffe0">
+        <font face="arial,helvetica,sans-serif" size="2">
+        <div align="justify">
+        <b>On-line Help</b><br>
+        <br>
+        Enter title, author(s) and editing firm of the book you require into their box.<br>
+        <br>
+        Before pressing the <i>Search</i> button select <i>Any of the words listed</i>
+        if you want an AND among the voices inserted or <i>All the words listed</i>
+        if you want an OR search.<br>
+        <br>
+        Once you've inputted your data, hit the <i>Search </i> button to begin the search.<br>
+        <br>
+        Bear in mind: it is not necessary to fill in <i>every</i> box to be able
+        to perform a book search. You may enter as much information as you want. Naturally,
+        if you only enter e.g. an author, the search results will be all the books by that
+        author contained in the Library.
+        </div>
+        </font>
+    </td>
+</tr>
+</table>
+
+</font>
 
 </body>
 </html>

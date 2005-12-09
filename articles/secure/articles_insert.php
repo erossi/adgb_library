@@ -1,34 +1,55 @@
-<?php if (file_exists('../../default.php')) { include '../../default.php'; } ?>
+<? if (file_exists('../../default.php')) { include '../../default.php'; } ?>
+<? if (file_exists('../../procedure/utility.php')) { include '../../procedure/utility.php'; } ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-    <TITLE>Library - Articles</TITLE>
-    <LINK REL="STYLESHEET" HREF="../../library.css">
-</HEAD>
-<BODY TEXT="Black" BGCOLOR="White" LINK="#CC9966" ALINK="#CC9966" VLINK="#CC9966">
+<html>
+<head>
+    <title><? print $prog_name ?> - Articles</title>
+    <link rel="stylesheet" href="../../library.css">
+</head>
+<body text="black" bgcolor="white" link="#cc9966" alink="#cc9966" vlink="#cc9966">
 
-<!-- Header -->
-<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0" BORDER="0">
-<TR>
-    <TD ALIGN="LEFT">
-    <FONT FACE="Arial,Helvetica,Sans-serif" SIZE="2">
-    &nbsp;Navigate: <A HREF="../../contents.php" TARGET="contents">Home Page</A> : <A HREF="../articles_index.php" TARGET="contents">Articles</A> : Articles list
-    </FONT>
-    </TD>
-</TR>
-</TABLE>
+<font face="arial,helvetica,sans-serif" size="2">
 
-<!-- Title -->
-<CENTER><H2>Insert an article</H2></CENTER>
+<? print_top($prog_name); ?>
+<? print_navigation('Insert an article','Home Page','../../contents.php','Articles','../articles_index.php'); ?>
+<? print_title('Insert an article'); ?>
 
-<FORM METHOD="GET" ACTION="articles_insert_commit.php">
-<UL>
-    <LI>&nbsp;Please enter article description, then press "Insert" button to commit:<BR>
-        &nbsp;<TEXTAREA NAME="note" ROWS="6" COLS="65"></TEXTAREA><BR><BR>
-    <LI>&nbsp;Commit insert ?&nbsp;<INPUT TYPE="SUBMIT" VALUE="Insert" ALIGN="ABSMIDDLE">&nbsp;<INPUT TYPE="RESET" VALUE="Reset" ALIGN="ABSMIDDLE">
-</UL>
-</FORM>
+<table align="center" width="90%" cellspacing="1" cellpadding="3" border="0">
+<tr>
+    <td align="left" valign="top" width="70%" bgcolor="#e0e0e0">
+        <font face="arial,helvetica,sans-serif" size="2">
+        Please insert article description then press <b>Insert</b> button:<br>
+        <form action="articles_insert_commit.php">
+        <table cellspacing="1" cellpadding="3" border="0">
+        <tr>
+            <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Description</font></td>
+            <td align="left"  valign="middle"><textarea name="note" rows="6" cols="65"></textarea></td>
+        </tr>
+        <tr>
+            <td>&nbsp</td>
+            <td><input type="submit" name="submit" value="Insert">&nbsp;<input type="reset" name="reset" value="Reset values"></td>
+        </tr>
+        </table>
+        </form>
+        <a href="javascript:history.back(1)">Back</a> to previous screen.
+        </font>
+    </td>
+    <td align="justify" valign="top" width="30%" bgcolor="#ffffe0">
+        <font face="arial,helvetica,sans-serif" size="2">
+        <div align="justify">
+        <b>On-line Help</b><br>
+        <br>
+        Enter article description and other informations into free form box.<br>
+        <br>
+        Once you've inputted your data, hit the <i>Insert</i> button to commit work.
+        </div>
+        </font>
+    </td>
+</tr>
+</table>
 
-</BODY>
-</HTML>
+</font>
+
+</body>
+</html>

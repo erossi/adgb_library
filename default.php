@@ -1,7 +1,7 @@
-<?php
+<?
     // inforazioni riguardanti la gestione web
     $prog_name = "Library";
-    $prog_version = "0.3";
+    $prog_version = "0.4";
     
     // debug
     $DEBUG = false;
