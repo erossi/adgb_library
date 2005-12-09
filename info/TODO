@@ -1,1 +1,12 @@
 - Controllare la possibilità di unificare le pagine per la gestione delle varie sezioni.
+* Modificare il nome della directory icone in "img". 
+
+* Quando prelevi un libro e premi @Draw anotherbook@ devi tornare al menu
+  principale
+* Quando inserisci un utente e premi "Insert another user" il link e' sbagliato
+* La scelta utente quando prelevi non mostra l'icona preleva!
+
+* Nella ricerca libri inserire un drop down combo con due scelte:
+   A-Armadio
+   B-Biblioteca
+  Predefinito e' il B!!

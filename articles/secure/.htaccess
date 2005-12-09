@@ -1,13 +1,13 @@
-Auth_PG_host localhost
-Auth_PG_port 5432
-Auth_PG_database biblioteca
-Auth_PG_pwd_table password
-Auth_PG_uid_field username
-Auth_PG_pwd_field password
+Auth_PGhost localhost
+Auth_PGport 5432
+Auth_PGdatabase biblioteca
+Auth_PGpwd_table password
+Auth_PGuid_field username
+Auth_PGpwd_field password
 AuthName "access Articles Restricted Area"
 AuthType basic
 Auth_PG_encrypted off
-Auth_PG_pwd_whereclause "and area='articles'"
+Auth_PGpwd_whereclause "and area='articles'"
 
 <LIMIT GET POST>
 require valid-user

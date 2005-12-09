@@ -1,3 +1,8 @@
+<!-- Library version 0.9, Copyright (C) 2000 TecnoBrain
+     Library comes with ABSOLUTELY NO WARRANTY; This is free software,
+     and you are welcome to redistribute it under GNU Public Licence Terms.
+     Please read the file COPYING shipped with this distribution. -->
+
 <? if (file_exists('../default.php')) { include '../default.php'; } ?>
 <? if (file_exists('../procedure/utility.php')) { include '../procedure/utility.php'; } ?>
 

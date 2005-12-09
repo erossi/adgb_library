@@ -1,3 +1,18 @@
+<?php
+    $mystring = 'xaabc';
+    $findme   = 'w';
+    $pos = strpos($mystring, $findme);
+
+    // Note our use of ===.  Simply == would not work as expected
+    // because the position of 'a' was the 0th (first) character.
+    if ($pos === false) {
+       echo "The string '$findme' was not found in the string '$mystring'";
+    } else {
+       echo "The string '$findme' was found in the string '$mystring'";
+       echo " and exists at position $pos";
+    }
+?>
+
 <? if (file_exists('../default.php')) { include '../default.php'; } ?>
 <? if (file_exists('../procedure/utility.php')) { include '../procedure/utility.php'; } ?>
 
@@ -141,7 +156,103 @@
             echo "</td>\n";
             // 2nd column
             echo "<td valign=\"top\" width=\"90%\">\n";
-            echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">" . $arr['articolo'] . "</font>\n";
+            echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">";
+          
+            // evidenzio le occorrenze trovate
+            // offset=0 vuol dire che parto dall'inizio
+            $offset=0;           // posizione della prima stringa
+
+            // metto in lowercase le stringhe da cercare una volta per tutte
+            // così aumento la velocità
+            $searchstring  = strtolower($arr['articolo']);
+            $neddle1 = strtolower($string1);
+            $neddle2 = strtolower($string2);
+            $neddle3 = strtolower($string3);
+            do {
+                if ($DEBUG) {
+                    echo "<i>" . $arr['articolo'] . "</i><br>\n";
+                }
+                
+                // indica se ho trovato una stringa di ricerca
+                // notare l'uso di ===. l'uguale semplice == non funzionerebbe perchè
+                // è il primo carattere.
+                $found_string=false;
+
+                if ($string3) {
+                    $pos1 = strpos($searchstring, $neddle1);
+                    if ($pos1 === false) {
+                        if ($DEBUG) { echo '$pos1 not found.<br>'; }
+                        $pos1=0;
+                    } else {
+                        $found_string=true;
+                        if ($DEBUG) { echo '$pos1 found at position <b>' . $pos1 . '</b>.<br>'; }
+                    };
+                } else {
+                    $pos1=0;
+                }
+
+
+                if ($string2) {
+                    $pos2 = strpos($searchstring, $neddle2);
+                    if ($pos2 === false) {
+                        if ($DEBUG) { echo '$pos2 not found.<br>'; }
+                        $pos2=0;
+                    } else {
+                        $found_string=true;
+                        if ($DEBUG) { echo '$pos2 found at position <b>' . $pos2 . '</b>.<br>'; }
+
+                    };
+                } else {
+                    $pos2=0;
+                }
+
+                if ($string3) {
+                    $pos3 = strpos($searchstring, $neddle3);
+                    if ($pos3 === false) {
+                        if ($DEBUG) { echo '$pos3 not found.<br>'; }
+                        $pos3=0;
+                    } else {
+                        $found_string=true;
+                        if ($DEBUG) { echo '$pos3 found at position <b>' . $pos3 . '</b>.<br>'; }
+                    }
+                } else {
+                    $pos3=0;
+                }
+
+                
+                if ($DEBUG) { 
+                    echo '$found_string value: <b>' . $found_string . '</b>.<br>';
+                }
+
+                //
+                if ($found_string) {
+                    $next_offset=min($pos1,$pos2,$pos3);
+                    if ($next_offset===$pos1) {
+                        $step=strlen($neddle1);
+                    }
+                    if ($next_offset===$pos2) {
+                        $step=strlen($neddle2);
+                    }
+                    if ($next_offset===$pos3) {
+                        $step=strlen($neddle3);
+                    }
+                    
+                    if ($DEBUG) { 
+                        echo '$step = <b>' . $step . '</b>.<br>';
+                        echo '$next_offset = <b>' . $next_offset . '</b>.<br>';
+                    }
+                    // 
+                    echo substr($arr['articolo'], $offset, $next_offset);
+                    echo "<b>";
+                    echo substr($arr['articolo'], $next_offset, $next_offset+$step);
+                    echo "</b>";
+                    $offset=$next_offset+1;
+                }
+            } while ($found);
+            
+            echo substr($arr['articolo'], $offset+$step);
+            
+            echo "</font>\n";
             echo "</td>\n";
             
             // 3rd column
@@ -158,6 +269,7 @@
 ?>
 
 </font>
+
 
 </body>
 </html>

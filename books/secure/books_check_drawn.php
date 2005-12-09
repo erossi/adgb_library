@@ -1,3 +1,8 @@
+<!-- Library version 0.9, Copyright (C) 2000 TecnoBrain
+     Library comes with ABSOLUTELY NO WARRANTY; This is free software,
+     and you are welcome to redistribute it under GNU Public Licence Terms.
+     Please read the file COPYING shipped with this distribution. -->
+
 <? if (file_exists('../../default.php')) { include '../../default.php'; } ?>
 <? if (file_exists('../../procedure/utility.php')) { include '../../procedure/utility.php'; } ?>
 
@@ -5,9 +10,6 @@
 <? print_title('Check drawn books'); ?>
 
 <?
-    // controllo i parametri
-    $query="SELECT count(*) FROM prelevati AS a,libri AS l WHERE a.scaffale=l.scaffale AND a.numero=l.numero AND data_in='Infinity'";
-
     // where..
     // NON C'E' MA E' STATA LASCIATA IN PREVISIONE DI MODIFCHE
     $where_clause="";
@@ -23,7 +25,8 @@
     // connessione al database
     $conn=db_connect($db_host,$db_port,$db_name,$db_user);    
 
-    // leggo gli articoli
+    // leggo il numero di libri prelevati
+    $query="SELECT count(*) FROM prelevati AS a,libri AS l WHERE a.scaffale=l.scaffale AND a.numero=l.numero AND data_in='Infinity'";
     $query=$query . $where_clause;
     if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };    
     $result = db_execute($conn,$query);
@@ -58,30 +61,7 @@
         echo "</tr>\n";
         echo "</table>\n";
         echo "</div>\n";
-
-        // print icon description
-/*        echo "<div align=\"center\">\n";
-        echo "<table cellspacing=\"1\" cellpadding=\"3\" border=\"0\" width=\"90%\">\n";        
-        echo "<tr>\n";
-        echo "    <td align=\"right\" valign=\"middle\" bgcolor=\"white\" width=\"10%\">\n";
-        echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
-        echo "    Key:\n";
-        echo "    </font>\n";
-        echo "    </td>\n";
-        echo "    <td align=\"left\" valign=\"middle\" bgcolor=\"#e0e0e0\">\n";
-        echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
-        echo "    &nbsp;<img src=\"../img/mini-help.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Information";
-        echo "    &nbsp;<img src=\"../img/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Draw";
-        echo "    &nbsp;<img src=\"../img/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Deposit";
-        echo "    &nbsp;<img src=\"../img/mini-history.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = History";
-        echo "    &nbsp;<img src=\"../img/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Edit";
-        echo "    &nbsp;<img src=\"../img/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Delete";
-        echo "    </font>\n";
-        echo "    </td>\n";
-        echo "</tr>\n"; 
-        echo "</table>\n";
-        echo "</div>\n";*/
-        
+      
         // stampo il risultato
         $query="SELECT nome_utente,cognome_utente,collocazione,l.scaffale,l.numero,data_out,titolo,info,aut1,aut2,casa_editoriale FROM prelevati AS a,libri AS l WHERE a.scaffale=l.scaffale AND a.numero=l.numero AND data_in='Infinity'" . $where_clause . $order_clause;
         $result = db_execute($conn,$query);

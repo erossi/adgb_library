@@ -92,7 +92,7 @@
     };
 
     // chiudo la connessione
-    db_close($conn);<<<
+    db_close($conn);
     
     echo "    Book saved.\n<br>";
     echo "    <br>";

@@ -1,4 +1,4 @@
-<!-- Library version 0.8, Copyright (C) 2000 TecnoBrain
+<!-- Library version 0.9, Copyright (C) 2000 TecnoBrain
      Library comes with ABSOLUTELY NO WARRANTY; This is free software,
      and you are welcome to redistribute it under GNU Public Licence Terms.
      Please read the file COPYING shipped with this distribution. -->

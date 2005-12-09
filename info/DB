@@ -1,4 +1,6 @@
 
+-- PROGETTO PER IL NUOVO DATABASE DELLA BIBLIOTECA
+
 ---------------------------------
 -- Tabelle                     --
 ---------------------------------
@@ -20,26 +22,36 @@ CREATE TABLE articoli (
     PRIMARY KEY (data)
 );
 
-DROP TABLE libri;
-CREATE TABLE libri (
-    collocazione_id  varchar( 2) NOT NULL,
-    scaffale         varchar( 5) NOT NULL,        
-    numero           varchar( 5) NOT NULL,
-    titolo           varchar(40) NOT NULL,
-    info             varchar(40) NOT NULL,
-    aut1             varchar(40) NOT NULL,
-    aut2             varchar(40) NOT NULL,
-    aut3             varchar(40) NOT NULL,
-    aut4             varchar(40) NOT NULL,
-    aut5             varchar(40) NOT NULL,
-    aut6             varchar(40) NOT NULL,
-    aut7             varchar(40) NOT NULL,
-    casa_editoriale  varchar(40) NOT NULL,
-    inventario       varchar(40) NOT NULL,
-    presente         boolean,
-    PRIMARY KEY (collocazione_id,scaffale,numero)
+DROP TABLE collocazioni;
+CREATE TABLE collocazioni (
+    collocazione_id  varchar(2)  NOT NULL,
+    descrizione      varchar(50) NOT NULL,
+    PRIMARY KEY (collocazione_id)
 );
 
+DROP TABLE libri;
+CREATE TABLE libri (
+    collocazione_id    varchar( 2) NOT NULL,
+    scaffale           varchar( 5) NOT NULL,        
+    numero             varchar( 5) NOT NULL,
+    titolo             varchar(40) NOT NULL,
+    info               varchar(40),
+    aut1               varchar(40) NOT NULL,
+    casa_editoriale    varchar(40),
+    inventario         varchar(40),
+    PRIMARY KEY (collocazione_id,scaffale,numero)
+    FOREIGN KEY collocazione_id REFERENCES collocazioni(collocazione_id)
+);
+
+DROP TABLE autori;
+CREATE TABLE autori (
+    collocazione_id    varchar( 2) NOT NULL,
+    scaffale           varchar( 5) NOT NULL,        
+    numero             varchar( 5) NOT NULL,
+    autore             varchar(60) NOT NULL,
+    PRIMARY KEY (collocazione_id,scaffale,numero)
+    FOREIGN KEY (collocazione_id,scaffale,numero) REFERENCES libri(collocazione_id,scaffale,numero)
+);
 
 DROP TABLE tipi_documento;
 CREATE TABLE utenti (
@@ -47,7 +59,6 @@ CREATE TABLE utenti (
     descrizione        varchar(50),
     PRIMARY KEY (tipo_documento_id)
 );    
-
 
 DROP TABLE utenti;
 CREATE TABLE utenti (
@@ -62,66 +73,14 @@ CREATE TABLE utenti (
     FOREIGN KEY (tipo_documento_id)
 );
 
----------------------------------
-
-DROP TABLE collocazioni;
-CREATE TABLE collocazioni (
-    collocazione_id  varchar( 2) NOT NULL,
-    descrizione      text
-    PRIMARY KEY (collocazione_id)
+DROP TABLE prelevati;
+CREATE TABLE prelevati (
+    collocazione_id    varchar( 2) NOT NULL,
+    scaffale           varchar( 5) NOT NULL,        
+    numero             varchar( 5) NOT NULL,
+    autore             varchar(60) NOT NULL,
+    PRIMARY KEY (collocazione_id,scaffale,numero)
 );
-
-
----------------------------------
--- Indici                      --
----------------------------------
-
--- (Nessuno)
-
----------------------------------
--- Permessi                    --
----------------------------------
-
-GRANT ALL PRIVILEGES ON admin TO "www-data";
-GRANT ALL PRIVILEGES ON studenti TO "www-data";
-GRANT ALL PRIVILEGES ON professori TO "www-data";
-GRANT ALL PRIVILEGES ON corsi TO "www-data";
-GRANT ALL PRIVILEGES ON appelli TO "www-data";
-GRANT ALL PRIVILEGES ON iscritti TO "www-data";
-GRANT ALL PRIVILEGES ON registrazione_studenti TO "www-data";
-GRANT ALL PRIVILEGES ON registrazione_professori TO "www-data";
-
----------------------------------
--- Rules                       --
----------------------------------
-
-CREATE RULE professori_del AS
-  ON DELETE TO professori DO DELETE FROM corsi WHERE professore_id=OLD.professore_id;
-CREATE RULE corsi_del AS
-  ON DELETE TO corsi DO DELETE FROM appelli WHERE corso_id=OLD.corso_id;
-CREATE RULE appelli_del AS
-  ON DELETE TO appelli DO DELETE FROM iscritti WHERE corso_id=OLD.corso_id;
-
----------------------------------
--- Triggers                    --
----------------------------------
-
--- (Nessuno)
-
----------------------------------
--- Dati Amministratore         --
----------------------------------
-
-INSERT INTO admin(admin_id,cognome,nome,email,password) VALUES ('admin','','Administrator','','1234567');
-
----------------------------------
--- Dati Tipo Documento         --
----------------------------------
-
-INSERT INTO admin(tipo_documento_id,descrizione) VALUES ('CID','Carta Identità');
-INSERT INTO admin(tipo_documento_id,descrizione) VALUES ('PAT','Patente');
-
-
 
 Table    = prelevati
 +----------------------------------+----------------------------------+-------+
@@ -149,3 +108,43 @@ Table    = riviste_prelevate
 | data_in                          | abstime                          |     4 |
 +----------------------------------+----------------------------------+-------+
 
+---------------------------------
+-- Indici                      --
+---------------------------------
+
+-- (Nessuno)
+
+---------------------------------
+-- Permessi                    --
+---------------------------------
+
+GRANT ALL PRIVILEGES ON admin TO "www-data";
+GRANT ALL PRIVILEGES ON libri TO "www-data";
+GRANT ALL PRIVILEGES ON riviste TO "www-data";
+
+-- FINIRE!!!
+
+---------------------------------
+-- Rules                       --
+---------------------------------
+
+-- (Nessuno)
+
+---------------------------------
+-- Triggers                    --
+---------------------------------
+
+-- (Nessuno)
+
+---------------------------------
+-- Dati Amministratore         --
+---------------------------------
+
+INSERT INTO admin(admin_id,cognome,nome,email,password) VALUES ('admin','','Administrator','','1234567');
+
+---------------------------------
+-- Dati Tipo Documento         --
+---------------------------------
+
+INSERT INTO admin(tipo_documento_id,descrizione) VALUES ('CID','Carta Identità');
+INSERT INTO admin(tipo_documento_id,descrizione) VALUES ('PAT','Patente');

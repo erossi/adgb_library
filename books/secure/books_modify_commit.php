@@ -1,3 +1,8 @@
+<!-- Library version 0.9, Copyright (C) 2000 TecnoBrain
+     Library comes with ABSOLUTELY NO WARRANTY; This is free software,
+     and you are welcome to redistribute it under GNU Public Licence Terms.
+     Please read the file COPYING shipped with this distribution. -->
+     
 <? if (file_exists('../../default.php')) { include '../../default.php'; } ?>
 <? if (file_exists('../../procedure/utility.php')) { include '../../procedure/utility.php'; } ?>
 
@@ -35,19 +40,7 @@
     // controllo se è stato inserito un titolo    
     if ($f_title == "") { print '<b>Warning:</b> You must insert a title.<br>'; $errori++; }
     
-    // controllo se esiste già la tripla shelf/number
-    $query="SELECT count(*) FROM libri WHERE collocazione='" . $f_collocation . "' AND scaffale='" . $f_shelf . "' AND numero=" . $f_number ;
-    if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };
-    
-    $result = db_execute($conn,$query);
-    // count ritorna sempre una riga
-    $arr=pg_fetch_array($result,0);
-    if ($DEBUG) { print 'Array 0 is: ' . $arr[0]; }
-    if ($arr[0] > 0) {
-        print '     <b>Warning:</b> There is already a book in collocation <b>' . $f_collocation . '</b>, shelf <b>' . $f_shelf . '</b>, number <b>' . $f_number . '</b>.<br>';
-        $errori++;
-    }
-    
+   
     // termina con un messaggio se ci sono errori
     if ($errori > 0 ) {
         print '     <br>There are <b>' . $errori . '</b> error(s). Please go <a href="javascript:history.back(1)">back</a> and modify insert string.';

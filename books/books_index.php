@@ -1,3 +1,8 @@
+<!-- Library version 0.9, Copyright (C) 2000 TecnoBrain
+     Library comes with ABSOLUTELY NO WARRANTY; This is free software,
+     and you are welcome to redistribute it under GNU Public Licence Terms.
+     Please read the file COPYING shipped with this distribution. -->
+
 <? if (file_exists('../default.php')) { include '../default.php'; } ?>
 <? if (file_exists('../procedure/utility.php')) { include '../procedure/utility.php'; } ?>
 
@@ -22,7 +27,7 @@
         <form action="books_list.php">
         <table cellspacing="1" cellpadding="3" border="0">
         <tr>
-            <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Title</font></td>
+            <td width="150" align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Title</font></td>
             <td><input type="text" name="f_title" size="30" align="absmiddle"></td>
         </tr>
         <tr>
@@ -69,13 +74,31 @@
         </tr>
         </table>
         </form>
-        <form action="secure/books_insert.php">
-            <input type="submit" value="Insert a new book">
-        </form>
-        <form action="secure/books_check_drawn.php">
-            <input type="hidden" name="f_order" value="c">
-            <input type="submit" value="Check drawn">
-        </form>
+
+        <table cellspacing="1" cellpadding="3" border="0">
+        <tr>
+            <td width="150" align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">New books</font></td>
+            <td>
+                <form action="secure/books_insert.php">
+                    <input type="submit" value="Insert a new book">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Check drawn books</font></td>
+            <td>
+                <form action="secure/books_check_drawn.php">
+                    <input type="hidden" name="f_order" value="c">
+                    <input type="submit" value="Check drawn">
+                </form>
+                <form action="secure/books_check_number.php">
+                    <input type="submit" value="Check missing numbers">
+                </form>
+            </td>
+        </tr>
+        </table>
+
+
         <a href="javascript:history.back(1)">Back</a> to previous screen.
         </font>
     </td>
