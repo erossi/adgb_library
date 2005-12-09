@@ -75,11 +75,11 @@
         echo "    </td>\n";
         echo "    <td align=\"left\" valign=\"middle\" bgcolor=\"#e0e0e0\">\n";
         echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
-        echo "    &nbsp;<img src=\"../icone/mini-next.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\">";
-        echo "    &nbsp;<img src=\"../icone/mini-back.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\">";
-        echo "    &nbsp;<img src=\"../icone/mini-up.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\">";
-        echo "    &nbsp;<img src=\"../icone/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\">";
-        echo "    &nbsp;<img src=\"../icone/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\">";
+        echo "    &nbsp;<img src=\"../img/mini-next.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\">";
+        echo "    &nbsp;<img src=\"../img/mini-back.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\">";
+        echo "    &nbsp;<img src=\"../img/mini-up.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\">";
+        echo "    &nbsp;<img src=\"../img/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\">";
+        echo "    &nbsp;<img src=\"../img/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\">";
         echo "    </font>\n";
         echo "    </td>\n";
         echo "</tr>\n"; 
@@ -160,7 +160,7 @@
             echo "    </td>\n";
             // last column (print operation)
             echo "    <td valign=\"top\" bgcolor=\"#e0e0e0\" width=\"5%\">\n";
-            echo "        <a href=\"admin_table_delete.php?table=" . $arr['tablename'] . "\"><img src=\"../icone/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Delete table\"></a>\n";
+            echo "        <a href=\"admin_table_delete.php?table=" . $arr['tablename'] . "\"><img src=\"../img/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Delete table\"></a>\n";
             echo "    </td>\n";
             echo "</tr>\n";
         };

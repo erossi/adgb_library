@@ -7,10 +7,10 @@ function changeicon(name,number) {
         if (((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) >= 3 )) || 
             ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4 ))) {
 	switch (number) {
-	    case 0: document.images[name].src='../icone/big-journals.png'; break;
-		case 1: document.images[name].src='../icone/big-articles.png'; break;
-		case 2: document.images[name].src='../icone/big-users.png'; break;
-		case 3: document.images[name].src='../icone/big-money.png'; break;
+	    case 0: document.images[name].src='../img/big-journals.png'; break;
+		case 1: document.images[name].src='../img/big-articles.png'; break;
+		case 2: document.images[name].src='../img/big-users.png'; break;
+		case 3: document.images[name].src='../img/big-money.png'; break;
 	}
 }
 }
@@ -25,7 +25,7 @@ function changeicon(name,number) {
     <td align="left" valign="top" width="70%" bgcolor="#e0e0e0">
         <font face="arial,helvetica,sans-serif" size="2">
         <div align="center">
-        <img src="../icone/big-warning.png" width="48" height="48" border="0" alt="Warning !"><br>
+        <img src="../img/big-warning.png" width="48" height="48" border="0" alt="Warning !"><br>
         </div>
         <b>Warning</b>: You have requested to delete table <b><? echo $table; ?></b>.
         Deleting a table will also delete <b>all</b> data contained within. Please confirm operation:

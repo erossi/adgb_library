@@ -7,10 +7,10 @@ function changeicon(name,number) {
         if (((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) >= 3 )) || 
             ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4 ))) {
 	switch (number) {
-	    case 0: document.images[name].src='../icone/big-journals.png'; break;
-		case 1: document.images[name].src='../icone/big-articles.png'; break;
-		case 2: document.images[name].src='../icone/big-users.png'; break;
-		case 3: document.images[name].src='../icone/big-money.png'; break;
+	    case 0: document.images[name].src='../img/big-journals.png'; break;
+		case 1: document.images[name].src='../img/big-articles.png'; break;
+		case 2: document.images[name].src='../img/big-users.png'; break;
+		case 3: document.images[name].src='../img/big-money.png'; break;
 	}
 }
 }
@@ -39,7 +39,7 @@ function changeicon(name,number) {
             <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Table Icon</font></td>
             <td>
                 <font face="arial,helvetica,sans-serif" size="2">
-                <img src="../icone/big-journals.png" name="f_icon" width="48" height="48" border="0" alt="Icona della tabella"><br>
+                <img src="../img/big-journals.png" name="f_icon" width="48" height="48" border="0" alt="Icona della tabella"><br>
             <!--/td>
         </tr>
         <tr>

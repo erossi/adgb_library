@@ -41,6 +41,7 @@
     } else {
         if (!ereg("[0-9]{1,3}",$f_number)) { print '<b>Warning:</b> Number on the shelf invalid.<br>'; $errori++; }
     }
+
     // termina con un messaggio se ci sono errori
     if ($errori > 0 ) {
         print '     <br>There are <b>' . $errori . '</b> error(s). Please go <a href="javascript:history.back(1)">back</a> and modify insert string.';
@@ -54,7 +55,7 @@
     // connessione al database
     $conn=db_connect($db_host,$db_port,$db_name,$db_user);
     
-    // controllo se esiste già la coppia shelf/number
+    // controllo se esiste già la tripla shelf/number
     $query="SELECT count(*) FROM libri WHERE collocazione='" . $f_collocation . "' AND scaffale='" . $f_shelf . "' AND numero=" . $f_number ;
     if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };
     
@@ -91,9 +92,10 @@
     };
 
     // chiudo la connessione
-    db_close($conn);
+    db_close($conn);<<<
     
-    echo "    Book saved.\n";
+    echo "    Book saved.\n<br>";
+    echo "    <br>";
     echo "    <form action=\"books_insert.php\">\n";
     echo "        <input type=\"submit\" value=\"Insert another book\">\n";
     echo "    </form>\n";

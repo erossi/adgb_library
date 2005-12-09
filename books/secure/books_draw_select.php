@@ -149,7 +149,7 @@
             
             // 4.th column
             print '<td valign="top">';
-            print '    <a href="books_draw_commit.php?oid=' . $arr['oid'] . '&coll=' . $coll . '&shelf=' . $shelf . '&num=' . $num . '"><img src="../../icone/ico_draw.gif" width="20" height="20" border="0" alt="Draw book"></a>';
+            print '    <a href="books_draw_commit.php?oid=' . $arr['oid'] . '&coll=' . $coll . '&shelf=' . $shelf . '&num=' . $num . '"><img src="../../img/mini-draw.png" width="25" height="25" border="0" alt="Draw book"></a>';
             print '</td>';
             print '</tr>';
         };

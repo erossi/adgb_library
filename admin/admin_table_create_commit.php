@@ -18,7 +18,7 @@
 
     // termina con un messaggio se ci sono errori
     if ($errori > 0 ) {
-        echo "<img src=\"../icone/ico-warning.png\" width=\"48\" height=\"48\" border=\"0\" alt=\"There are some errors!\">\n";
+        echo "<img src=\"../img/ico-warning.png\" width=\"48\" height=\"48\" border=\"0\" alt=\"There are some errors!\">\n";
         echo "     <br>There are <b>" . $errori . "</b> error(s). Please go <a href=\"javascript:history.back(1)\">back</a> and modify insert string.\n";
         echo "    </font>\n";
         echo "    </td>\n";

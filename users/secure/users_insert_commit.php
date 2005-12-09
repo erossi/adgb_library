@@ -21,11 +21,30 @@
     print '<tr>';
     print '    <td align="left" valign="top" width="70%" bgcolor="#e0e0e0">';
     print '    <font face="arial,helvetica,sans-serif" size="2">';
+
+    // connessione al database
+    $conn=db_connect($db_host,$db_port,$db_name,$db_user);
    
     $errori=0;
     if ($f_name == '') { print '<b>Warning:</b> You must insert a name.<br>'; $errori++; }
     if ($f_surname == '') { print '<b>Warning:</b> You must insert a surname.<br>'; $errori++; }
-    if ($f_id_card == '') { print '<b>Warning:</b> You must insert information for ID card.<br>'; $errori++; }        
+    if ($f_id_card == '') { print '<b>Warning:</b> You must insert information for an ID card.<br>'; $errori++; }
+    if ($f_id_card_city == '') { print '<b>Warning:</b> You must insert a city for ID card.<br>'; $errori++; }
+    if ($f_phone == '') { print '<b>Warning:</b> You must insert a phone for this contact.<br>'; $errori++; }
+    
+    // controllo se esiste già un utente con lo stesso nome
+    $query="SELECT count(*) FROM  utenti WHERE carta_identita='" . $f_id_card . "'" ;
+    if ($DEBUG) { print 'Query: <b>' . $query . '</b><br>'; };
+    
+    $result = db_execute($conn,$query);
+    // count ritorna sempre una riga
+    $arr=pg_fetch_array($result,0);
+    if ($DEBUG) { print 'Array 0 is: ' . $arr[0]; }
+    if ($arr[0] > 0) {
+        print '     <b>Warning:</b> There is already a user with the same ID card.';
+        $errori++;
+    }
+    
     // termina con un messaggio se ci sono errori
     if ($errori > 0 ) {
         print '     <br>There are <b>' . $errori . '</b> error(s). Please go <a href="javascript:history.back(1)">back</a> and modify insert string.';
@@ -36,8 +55,6 @@
         exit;
     }
 
-    // connessione al database
-    $conn=db_connect($db_host,$db_port,$db_name,$db_user);
 
     // aggiorno il database
     $query="INSERT INTO utenti(nome,cognome,titolo,carta_identita,comune_carta,telefono) VALUES ('" .
@@ -83,13 +100,14 @@
     echo "    </table>\n";
     echo "    <br>\n";
 
-    print '    <form action="../users_insert.php">';
+    print '    <form action="users_insert.php">';
     print '        <input type="submit" value="Insert another user">';
     print '    </form>';    
     print '    <form action="../users_index.php">';
     print '        <input type="submit" value="Go to Users Menu">';
     print '    </form>';
-    
+    print '    <br>';
+    print '    <br>';
     print '    <a href="javascript:history.back(1)">Back</a> to previous screen.';
     print '    </font>';
     print '    </td>';

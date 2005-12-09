@@ -1,30 +1,127 @@
-Table    = articoli
-+----------------------------------+----------------------------------+-------+
-|              Field               |              Type                | Length|
-+----------------------------------+----------------------------------+-------+
-| articolo                         | text                             |   var |
-+----------------------------------+----------------------------------+-------+
 
-Table    = libri
-+----------------------------------+----------------------------------+-------+
-|              Field               |              Type                | Length|
-+----------------------------------+----------------------------------+-------+
-| scaffale                         | char                             |     1 |
-| numero                           | int4                             |     4 |
-| titolo                           | text                             |   var |
-| info                             | text                             |   var |
-| aut1                             | text                             |   var |
-| aut2                             | text                             |   var |
-| aut3                             | text                             |   var |
-| aut4                             | text                             |   var |
-| aut5                             | text                             |   var |
-| aut6                             | text                             |   var |
-| aut7                             | text                             |   var |
-| casa_editoriale                  | text                             |   var |
-| codice_inventariale              | text                             |   var |
-| collocazione                     | char                             |     1 |
-| presente                         | bool                             |     1 |
-+----------------------------------+----------------------------------+-------+
+---------------------------------
+-- Tabelle                     --
+---------------------------------
+
+DROP TABLE admin;
+CREATE TABLE admin (
+    admin_id        varchar(40) NOT NULL,
+    cognome         varchar(40) NOT NULL,
+    nome            varchar(40) NOT NULL,
+    email           varchar(40) NOT NULL,
+    password        varchar(30) NOT NULL CHECK (char_length(password)>6),
+    PRIMARY KEY (admin_id)
+);
+
+DROP TABLE articoli;
+CREATE TABLE articoli (
+    data            timestamp   NOT NULL,
+    articolo        text        NOT NULL,
+    PRIMARY KEY (data)
+);
+
+DROP TABLE libri;
+CREATE TABLE libri (
+    collocazione_id  varchar( 2) NOT NULL,
+    scaffale         varchar( 5) NOT NULL,        
+    numero           varchar( 5) NOT NULL,
+    titolo           varchar(40) NOT NULL,
+    info             varchar(40) NOT NULL,
+    aut1             varchar(40) NOT NULL,
+    aut2             varchar(40) NOT NULL,
+    aut3             varchar(40) NOT NULL,
+    aut4             varchar(40) NOT NULL,
+    aut5             varchar(40) NOT NULL,
+    aut6             varchar(40) NOT NULL,
+    aut7             varchar(40) NOT NULL,
+    casa_editoriale  varchar(40) NOT NULL,
+    inventario       varchar(40) NOT NULL,
+    presente         boolean,
+    PRIMARY KEY (collocazione_id,scaffale,numero)
+);
+
+
+DROP TABLE tipi_documento;
+CREATE TABLE utenti (
+    tipo_documento_id  varchar( 3) NOT NULL,   -- Carta identità, Patente, Ecc..
+    descrizione        varchar(50),
+    PRIMARY KEY (tipo_documento_id)
+);    
+
+
+DROP TABLE utenti;
+CREATE TABLE utenti (
+    utente_id          varchar(30) NOT NULL,
+    tipo_documento_id  varchar( 3) NOT NULL,
+    citta_documento    varchar(30),            -- Se il documento prevede una città questo campo lo indica
+    nome               varchar(40) NOT NULL,
+    cognome            varchar(40) NOT NULL,
+    telefono           varchar(30) NOT NULL,
+    email              varchar(50) NOT NULL,
+    PRIMARY KEY (utente_id,tipo_id),
+    FOREIGN KEY (tipo_documento_id)
+);
+
+---------------------------------
+
+DROP TABLE collocazioni;
+CREATE TABLE collocazioni (
+    collocazione_id  varchar( 2) NOT NULL,
+    descrizione      text
+    PRIMARY KEY (collocazione_id)
+);
+
+
+---------------------------------
+-- Indici                      --
+---------------------------------
+
+-- (Nessuno)
+
+---------------------------------
+-- Permessi                    --
+---------------------------------
+
+GRANT ALL PRIVILEGES ON admin TO "www-data";
+GRANT ALL PRIVILEGES ON studenti TO "www-data";
+GRANT ALL PRIVILEGES ON professori TO "www-data";
+GRANT ALL PRIVILEGES ON corsi TO "www-data";
+GRANT ALL PRIVILEGES ON appelli TO "www-data";
+GRANT ALL PRIVILEGES ON iscritti TO "www-data";
+GRANT ALL PRIVILEGES ON registrazione_studenti TO "www-data";
+GRANT ALL PRIVILEGES ON registrazione_professori TO "www-data";
+
+---------------------------------
+-- Rules                       --
+---------------------------------
+
+CREATE RULE professori_del AS
+  ON DELETE TO professori DO DELETE FROM corsi WHERE professore_id=OLD.professore_id;
+CREATE RULE corsi_del AS
+  ON DELETE TO corsi DO DELETE FROM appelli WHERE corso_id=OLD.corso_id;
+CREATE RULE appelli_del AS
+  ON DELETE TO appelli DO DELETE FROM iscritti WHERE corso_id=OLD.corso_id;
+
+---------------------------------
+-- Triggers                    --
+---------------------------------
+
+-- (Nessuno)
+
+---------------------------------
+-- Dati Amministratore         --
+---------------------------------
+
+INSERT INTO admin(admin_id,cognome,nome,email,password) VALUES ('admin','','Administrator','','1234567');
+
+---------------------------------
+-- Dati Tipo Documento         --
+---------------------------------
+
+INSERT INTO admin(tipo_documento_id,descrizione) VALUES ('CID','Carta Identità');
+INSERT INTO admin(tipo_documento_id,descrizione) VALUES ('PAT','Patente');
+
+
 
 Table    = prelevati
 +----------------------------------+----------------------------------+-------+
@@ -52,15 +149,3 @@ Table    = riviste_prelevate
 | data_in                          | abstime                          |     4 |
 +----------------------------------+----------------------------------+-------+
 
-Table    = utenti
-+----------------------------------+----------------------------------+-------+
-|              Field               |              Type                | Length|
-+----------------------------------+----------------------------------+-------+
-| nome                             | text                             |   var |
-| cognome                          | text                             |   var |
-| titolo                           | text                             |   var |
-| telefono                         | text                             |   var |
-| e_mail                           | text                             |   var |
-| carta_identita                   | text                             |   var |
-| comune_carta                     | text                             |   var |
-+----------------------------------+----------------------------------+-------+

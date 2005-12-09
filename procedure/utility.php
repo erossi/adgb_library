@@ -77,7 +77,7 @@
         echo "    </td>\n";
         echo "    <td align=\"right\" valign=\"middle\" bgcolor=\"#e0e0e0\" width=\"10%\">\n";
         echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
-        echo "    <img name=\"ico_db_status\" src=\"" . find_prefix() . "icone/micro-database-off.png\" onmouseover=\"changeimage('ico_db_status','" . find_prefix() . "icone/mini-database.png')\" width=\"15\" height=\"15\" border=\"0\" align=\"absmiddle\">\n";
+        echo "    <img name=\"ico_db_status\" src=\"" . find_prefix() . "img/micro-database-off.png\" onmouseover=\"changeimage('ico_db_status','" . find_prefix() . "icone/mini-database.png')\" width=\"15\" height=\"15\" border=\"0\" align=\"absmiddle\">\n";
         echo "    </font>\n";
         echo "    </td>\n";        
         echo "</tr>\n";
@@ -101,7 +101,7 @@
     
     // print "back to previous screen"
     function print_back() {
-        echo "&nbsp;<img src=\"" . find_prefix() . "icone/micro-back.png\" align=\"absmiddle\">&nbsp;<a href=\"javascript:history.back(1)\">Back</a> to previous screen.\n";
+        echo "&nbsp;<img src=\"" . find_prefix() . "img/micro-back.png\" align=\"absmiddle\">&nbsp;<a href=\"javascript:history.back(1)\">Back</a> to previous screen.\n";
     };
 
     // stampa il titolo
@@ -122,7 +122,7 @@
         // activate image
         echo "<script language=\"javascript\">\n";
         echo "//<!--\n";
-        echo "  changeimage('ico_db_status','" . find_prefix() . "icone/micro-database-on.png');\n";
+        echo "  changeimage('ico_db_status','" . find_prefix() . "img/micro-database-on.png');\n";
         echo "//-->\n";
         echo "</script>\n";
         // compose connection string
@@ -161,7 +161,7 @@
         // deactivate image
         echo "<script language=\"javascript\">\n";
         echo "//<!--\n";
-        echo "  changeimage('ico_db_status','" . find_prefix() . "icone/micro-database-off.png');\n";
+        echo "  changeimage('ico_db_status','" . find_prefix() . "img/micro-database-off.png');\n";
         echo "//-->\n";
         echo "</script>\n";
         return;

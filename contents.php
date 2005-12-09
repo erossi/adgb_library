@@ -1,4 +1,4 @@
-<!-- Library version 0.5, Copyright (C) 2000 TecnoBrain
+<!-- Library version 0.8, Copyright (C) 2000 TecnoBrain
      Library comes with ABSOLUTELY NO WARRANTY; This is free software,
      and you are welcome to redistribute it under GNU Public Licence Terms.
      Please read the file COPYING shipped with this distribution. -->
@@ -24,10 +24,10 @@
         Please select an option below:<br>
         <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
-            <td align="center" valign="bottom" width="25%"><a href="books/books_index.php"><img src="icone/big-books.png" width="48" height="48" border="0" alt="Books"></a></td>
-            <td align="center" valign="bottom" width="25%"><a href="articles/articles_index.php"><img src="icone/big-articles.png" width="48" height="48" border="0" alt="Articles"></a></td>
-            <td align="center" valign="bottom" width="25%"><a href="users/users_index.php"><img src="icone/big-users.png" width="48" height="48" border="0" alt="Users"></a></td>
-            <td align="center" valign="bottom" width="25%"><a href="admin/admin_index.php"><img src="icone/big-admin.png" width="48" height="48" border="0" alt="Administrators section"></a></td>
+            <td align="center" valign="bottom" width="25%"><a href="books/books_index.php"><img src="img/big-books.png" width="48" height="48" border="0" alt="Books"></a></td>
+            <td align="center" valign="bottom" width="25%"><a href="articles/articles_index.php"><img src="img/big-articles.png" width="48" height="48" border="0" alt="Articles"></a></td>
+            <td align="center" valign="bottom" width="25%"><a href="users/users_index.php"><img src="img/big-users.png" width="48" height="48" border="0" alt="Users"></a></td>
+            <td align="center" valign="bottom" width="25%"><a href="admin/admin_index.php"><img src="img/big-admin.png" width="48" height="48" border="0" alt="Administrators section"></a></td>
         </tr>
         <tr>
             <td align="center" valign="top">
@@ -71,7 +71,7 @@
 <br>
 <br>
 <br>
-This software use some <a href="http://www.gnome.org" target="_top">GNOME<img src="icone/logo-gnome.gif" width="25" height="25" border="0" hspace="5" alt="The GNOME Project" align="absmiddle"></a> icons.<br>
+This software use some <a href="http://www.gnome.org" target="_top">GNOME<img src="img/logo-gnome.gif" width="25" height="25" border="0" hspace="5" alt="The GNOME Project" align="absmiddle"></a> icons.<br>
 <br>
 This is free software, and you are welcome to redistribute it under the <a href="COPYING">Gnu Public License</a> terms.
 </div>

@@ -146,12 +146,12 @@
         echo "    </td>\n";
         echo "    <td align=\"left\" valign=\"middle\" bgcolor=\"#e0e0e0\">\n";
         echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
-        echo "    &nbsp;<img src=\"../icone/mini-help.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Information";
-        echo "    &nbsp;<img src=\"../icone/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Draw";
-        echo "    &nbsp;<img src=\"../icone/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Deposit";
-        echo "    &nbsp;<img src=\"../icone/mini-history.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = History";
-        echo "    &nbsp;<img src=\"../icone/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Edit";
-        echo "    &nbsp;<img src=\"../icone/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Delete";
+        echo "    &nbsp;<img src=\"../img/mini-help.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Information";
+        echo "    &nbsp;<img src=\"../img/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Draw";
+        echo "    &nbsp;<img src=\"../img/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Deposit";
+        echo "    &nbsp;<img src=\"../img/mini-history.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = History";
+        echo "    &nbsp;<img src=\"../img/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Edit";
+        echo "    &nbsp;<img src=\"../img/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Delete";
         echo "    </font>\n";
         echo "    </td>\n";
         echo "</tr>\n"; 
@@ -182,9 +182,9 @@
         print '<table cellspacing="1" cellpadding="3" border="0" width="90%">';
         print '<tr bgcolor="#336699">';
         print '    <td width="5%"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Num.</font></td>';
-        print '    <td width="65%"><font face="arial,helvetica,sans-serif" size="2" style="color: white"><a href="books_list.php?from=' . $from . '&to=' . $to . '&order=t&where=' . $where_encoded . '" style="color:white">Book description</a></font></td>';
+        print '    <td width="60%"><font face="arial,helvetica,sans-serif" size="2" style="color: white"><a href="books_list.php?from=' . $from . '&to=' . $to . '&order=t&where=' . $where_encoded . '" style="color:white">Book description</a></font></td>';
         print '    <td width="15%" colspan="3"><font face="arial,helvetica,sans-serif" size="2" style="color: white"><a href="books_list.php?from=' . $from . '&to=' . $to . '&order=c&where=' . $where_encoded . '" style="color:white">Collocation</a></font></td>';
-        print '    <td width="15%" colspan="2"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Operation</font></td>';
+        print '    <td width="20%" colspan="2"><font face="arial,helvetica,sans-serif" size="2" style="color: white">Operation</font></td>';
         for ($count=$from; $count<=$to; $count++)        
         {
             $arr=pg_fetch_array ($result,$count);
@@ -194,7 +194,7 @@
                 echo "<tr bgcolor=\"white\">\n";
             };
 
-            // first column
+            // first column (number)
             echo "<td valign=\"top\" width=\"5%\">\n";
             echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
             echo "    " . $count . "\n";
@@ -207,10 +207,10 @@
             echo "    </font>\n";
             echo "</td>\n";
 
-            // second column
-            echo "<td valign=\"top\" width=\"5%\"";
+            // second column (text)
+            echo "<td valign=\"top\" width=\"60%\"";
             if ($arr['presente'] == 'f') {
-                echo " background=\"../icone/back_drown.gif\">\n";
+                echo " background=\"../img/back_drown.gif\">\n";
             } else {
                 echo ">\n";
             }
@@ -227,7 +227,8 @@
             print '    <br><u>' . $arr['casa_editoriale'] . '</u>';
             print '    </font>';
             print '</td>';
-            // 3rd column (3 fields)
+            
+	    // 3rd column (3 fields)
             echo "<td valign=\"top\" width=\"5%\">\n";
             echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">" . $arr['collocazione'] . "</font>\n";
             echo "</td>\n";
@@ -237,21 +238,22 @@
             echo "<td valign=\"top\" width=\"5%\">\n";
             echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">" . $arr['numero'] . "</font>\n";
             echo "</td>\n";
-            // 4th column
+	    
+            // 4th column (operations)
             echo "<td valign=\"top\" bgcolor=\"#e0e0e0\" width=\"5%\">\n";
-            echo "    <a href=\"books_info.php?oid=" . $arr['oid'] . "\"><img src=\"../icone/mini-help.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"View detailed information for this book\"></a>\n";
+            echo "    <a href=\"books_info.php?oid=" . $arr['oid'] . "\"><img src=\"../img/mini-help.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"View detailed information for this book\"></a>\n";
             echo "</td>\n";
 
-            // last column (print operation)
-            echo "    <td valign=\"top\" bgcolor=\"#e0e0e0\" width=\"5%\">\n";
+            // last column (operation)
+            echo "    <td valign=\"top\" bgcolor=\"#e0e0e0\" width=\"15%\">\n";
             if ($arr['presente'] == 'f') {
-                echo "        <a href=\"secure/books_deposit.php?coll=" . $arr['collocazione'] . "&shelf=" . $arr['scaffale'] . "&num=" . $arr['numero'] . "\"><img src=\"../icone/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Deposit this book\"></a>\n";
+                echo "        <a href=\"secure/books_deposit.php?coll=" . $arr['collocazione'] . "&shelf=" . $arr['scaffale'] . "&num=" . $arr['numero'] . "\"><img src=\"../img/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Deposit this book\"></a>\n";
             } else {
-                echo "        <a href=\"secure/books_draw.php?coll=" . $arr['collocazione'] . "&shelf=" . $arr['scaffale'] . "&num=" . $arr['numero'] . "\"><img src=\"../icone/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Draw this book\"></a>\n";
+                echo "        <a href=\"secure/books_draw.php?coll=" . $arr['collocazione'] . "&shelf=" . $arr['scaffale'] . "&num=" . $arr['numero'] . "\"><img src=\"../img/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Draw this book\"></a>\n";
             }
-            echo "        <a href=\"secure/books_history.php?coll=" . $arr['collocazione'] . "&shelf=" . $arr['scaffale'] . "&num=" . $arr['numero'] . "\"><img src=\"../icone/mini-history.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"View history for this book\"></a>\n";
-            echo "        <a href=\"secure/books_modify.php?oid=" . $arr['oid'] . "\"><img src=\"../icone/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Modify information for this book\"></a>\n";
-            echo "        <a href=\"secure/books_delete.php?oid=" . $arr['oid'] . "\"><img src=\"../icone/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Delete this book\"></a>\n";
+            echo "        <a href=\"secure/books_history.php?coll=" . $arr['collocazione'] . "&shelf=" . $arr['scaffale'] . "&num=" . $arr['numero'] . "\"><img src=\"../img/mini-history.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"View history for this book\"></a>\n";
+            echo "        <a href=\"secure/books_modify.php?oid=" . $arr['oid'] . "\"><img src=\"../img/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Modify information for this book\"></a>\n";
+            echo "        <a href=\"secure/books_delete.php?oid=" . $arr['oid'] . "\"><img src=\"../img/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Delete this book\"></a>\n";
             echo "    </td>\n";
             echo "</tr>\n";
         };

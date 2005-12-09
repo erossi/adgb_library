@@ -43,7 +43,7 @@
         </font>
         </form>
         <form action="secure/articles_insert.php">
-            <input type="submit" name="submit" value="Insert a new article" width="50%"><img src="../icone/big-articles.png" width="48" height="48" border="0" hspace="10" alt="GestArt Version 0.1" align="absmiddle">
+            <input type="submit" name="submit" value="Insert a new article" width="50%"><img src="../img/big-articles.png" width="48" height="48" border="0" hspace="10" alt="GestArt Version 0.1" align="absmiddle">
         </form>
         </font>
     </td>

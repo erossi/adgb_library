@@ -11,7 +11,7 @@
         <table cellspacing="1" cellpadding="3" border="0">
         <tr>
             <td align="right" valign="top">
-                <img src="../icone/big-admin.png" width="48" height="48" border="0" hspace="5">
+                <img src="../img/big-admin.png" width="48" height="48" border="0" hspace="5">
             </td>
             <td align="left" valign="top">
                 <form action="admin_list.php">

@@ -60,9 +60,6 @@
     print '    <td align="left" valign="top" width="70%" bgcolor="#e0e0e0">';
     print '    <font face="arial,helvetica,sans-serif" size="2">';
     echo "    User <b>" . $arr['cognome'] . " " . $arr['nome'] . "</b> has draw book in collocation <b>" . $coll . "</b>, shelf <b>" . $shelf . "</b>, number <b>" . $num . "</b>.<br>\n";
-    echo "    <form action=\"../books_list.php\">\n";
-    echo "        <input type=\"submit\" value=\"Draw another book\">\n";
-    echo "    </form>\n";
     echo "    <form action=\"../books_index.php\">\n";
     echo "        <input type=\"submit\" value=\"Return to Books menu\">\n";
     echo "    </form>\n";

@@ -70,12 +70,12 @@
         echo "    </td>\n";
         echo "    <td align=\"left\" valign=\"middle\" bgcolor=\"#e0e0e0\">\n";
         echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
-        echo "    &nbsp;<img src=\"../icone/mini-help.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Information";
-        echo "    &nbsp;<img src=\"../icone/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Draw";
-        echo "    &nbsp;<img src=\"../icone/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Deposit";
-        echo "    &nbsp;<img src=\"../icone/mini-history.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = History";
-        echo "    &nbsp;<img src=\"../icone/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Edit";
-        echo "    &nbsp;<img src=\"../icone/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Delete";
+        echo "    &nbsp;<img src=\"../img/mini-help.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Information";
+        echo "    &nbsp;<img src=\"../img/mini-draw.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Draw";
+        echo "    &nbsp;<img src=\"../img/mini-deposit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Deposit";
+        echo "    &nbsp;<img src=\"../img/mini-history.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = History";
+        echo "    &nbsp;<img src=\"../img/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Edit";
+        echo "    &nbsp;<img src=\"../img/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Delete";
         echo "    </font>\n";
         echo "    </td>\n";
         echo "</tr>\n"; 

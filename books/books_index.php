@@ -39,7 +39,12 @@
         </tr>
         <tr>
             <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Collocation</font></td>
-            <td><input type="text" name="f_collocation" size="11" align="absmiddle"></td>
+            <td><!--input type="text" name="f_collocation" size="11" align="absmiddle"-->
+                <select name="f_collocation" size="1">
+    	    	    <option value="A">A - Armadio</option>
+    	    	    <option value="B" selected>B - Biblioteca</option>
+                </select><br>
+	    </td>
         </tr>
         <tr>
             <td align="right" valign="middle" bgcolor="#336699"><font face="arial,helvetica,sans-serif" size="2" color="white">Shelf&nbsp;/&nbsp;Number</font></td>

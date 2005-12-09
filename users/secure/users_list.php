@@ -95,8 +95,8 @@
         echo "    </td>\n";
         echo "    <td align=\"left\" valign=\"middle\" bgcolor=\"#e0e0e0\">\n";
         echo "    <font face=\"arial,helvetica,sans-serif\" size=\"2\">\n";
-        echo "    &nbsp;<img src=\"../../icone/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Edit";
-        echo "    &nbsp;<img src=\"../../icone/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Delete";
+        echo "    &nbsp;<img src=\"../../img/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Edit";
+        echo "    &nbsp;<img src=\"../../img/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" align=\"absmiddle\"> = Delete";
         echo "    </font>\n";
         echo "    </td>\n";
         echo "</tr>\n"; 
@@ -164,8 +164,8 @@
             
             // 3rd column
             echo "    <td valign=\"top\" bgcolor=\"#e0e0e0\" width=\"5%\">\n";
-            echo "        <a href=\"users_modify.php?oid=" . $arr['oid'] . "\"><img src=\"../../icone/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Modify information for this user\"></a>\n";
-            echo "        <a href=\"users_delete.php?oid=" . $arr['oid'] . "\"><img src=\"../../icone/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Delete this user\"></a>\n";
+            echo "        <a href=\"users_modify.php?oid=" . $arr['oid'] . "\"><img src=\"../../img/mini-edit.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Modify information for this user\"></a>\n";
+            echo "        <a href=\"users_delete.php?oid=" . $arr['oid'] . "\"><img src=\"../../img/mini-delete.png\" width=\"25\" height=\"25\" border=\"0\" alt=\"Delete this user\"></a>\n";
             echo "    </td>\n";
             echo "</tr>\n";
         };
